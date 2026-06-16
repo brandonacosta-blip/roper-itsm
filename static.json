@@ -1,0 +1,7 @@
+{
+  "root": ".",
+  "routes": {
+    "/": "itsm-outreach.html",
+    "/**": "itsm-outreach.html"
+  }
+}

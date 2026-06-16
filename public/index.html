@@ -1,0 +1,1945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agentforce IT Service — Dealer Outreach</title>
+<style>
+/* ── BRAND TOKENS (swap per customer) ── */
+:root {
+  --dealer-name:       "John Deere";
+  --brand-primary:     #367C2B;   /* JD green */
+  --brand-secondary:   #FFDE00;   /* JD yellow */
+  --brand-dark:        #1F4A18;
+  --brand-text-on:     #000;      /* text on secondary */
+  --sf-navy:           #032D60;
+  --sf-blue:           #0070D2;
+  --sf-cloud:          #00A1E0;
+  --sf-green:          #2E7D32;
+  --sf-yellow:         #F59E0B;
+  --sf-red:            #C23934;
+  --bg:                #F4F6F9;
+  --card:              #FFFFFF;
+  --border:            #E0E4EA;
+  --text:              #1A1A2E;
+  --muted:             #6B7280;
+  --radius:            10px;
+  --shadow:            0 2px 16px rgba(0,0,0,.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); }
+
+/* ── HEADER ── */
+.hdr {
+  background: var(--sf-navy);
+  padding: 0 40px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 3px solid var(--brand-primary);
+}
+.hdr-left { display: flex; align-items: center; gap: 16px; }
+.sf-cloud-logo { display: flex; align-items: center; gap: 8px; }
+.sf-cloud-logo svg { width: 32px; height: 22px; }
+.sf-wordmark { font-size: 16px; font-weight: 700; color: #fff; letter-spacing: -.3px; }
+.hdr-divider { width: 1px; height: 28px; background: rgba(255,255,255,.2); }
+.hdr-product { font-size: 12px; color: rgba(255,255,255,.65); }
+.dealer-badge {
+  background: var(--brand-primary); color: var(--brand-secondary);
+  font-size: 11px; font-weight: 800; padding: 5px 14px; border-radius: 20px;
+  letter-spacing: .5px; text-transform: uppercase;
+  border: 1.5px solid var(--brand-secondary);
+}
+
+/* ── HERO ── */
+.hero {
+  background: linear-gradient(135deg, var(--sf-navy) 0%, #0c3d6e 60%, #1a5276 100%);
+  padding: 52px 40px 48px;
+  border-bottom: 4px solid var(--brand-primary);
+  position: relative; overflow: hidden;
+}
+.hero-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; gap: 40px;
+}
+.hero-text { flex: 1; min-width: 0; }
+.hero-photos {
+  flex-shrink: 0; width: 360px;
+  display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 160px 120px; gap: 6px;
+}
+.hero-photos img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 8px;
+  border: 2px solid rgba(255,255,255,.15);
+  box-shadow: 0 6px 20px rgba(0,0,0,.45);
+  display: block;
+}
+.hero-photos img:first-child {
+  grid-column: 1 / -1;
+}
+.hero-eyebrow {
+  font-size: 10px; font-weight: 800; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--brand-secondary); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.hero-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--brand-secondary); border-radius: 1px; }
+.hero-title { font-size: 36px; font-weight: 300; color: #fff; line-height: 1.2; margin-bottom: 12px; font-family: Georgia, serif; }
+.hero-title strong { font-weight: 700; color: var(--brand-secondary); }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,.65); max-width: 560px; line-height: 1.6; }
+
+/* ── CONFIGURATOR BAND ── */
+.config-band {
+  background: #fff; border-bottom: 1px solid var(--border);
+  padding: 24px 40px;
+  box-shadow: 0 2px 12px rgba(0,0,0,.06);
+  position: sticky; top: 0; z-index: 100;
+}
+.config-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 16px; align-items: end; }
+.config-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 5px; }
+.config-input, .config-select {
+  width: 100%; border: 1.5px solid var(--border); border-radius: 7px;
+  padding: 9px 12px; font-size: 13px; font-family: inherit; outline: none;
+  background: #fff; color: var(--text); transition: .15s;
+}
+.config-input:focus, .config-select:focus { border-color: var(--sf-blue); box-shadow: 0 0 0 3px rgba(0,112,210,.1); }
+.config-btn {
+  background: var(--brand-primary); color: var(--brand-secondary);
+  border: none; border-radius: 7px; padding: 10px 24px;
+  font-size: 13px; font-weight: 800; cursor: pointer; white-space: nowrap;
+  transition: .15s; letter-spacing: .3px;
+}
+.config-btn:hover { background: var(--brand-dark); }
+
+/* ── MAIN CONTENT ── */
+.main { max-width: 1100px; margin: 0 auto; padding: 36px 24px 60px; }
+
+/* ── COMPETITOR SPOTLIGHT ── */
+.competitor-card {
+  background: var(--sf-navy); color: #fff; border-radius: var(--radius);
+  padding: 24px 28px; margin-bottom: 28px;
+  border-left: 4px solid var(--brand-secondary);
+  display: none;
+}
+.competitor-card.visible { display: flex; gap: 20px; align-items: flex-start; }
+.comp-ico { font-size: 36px; flex-shrink: 0; }
+.comp-body { flex: 1; }
+.comp-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-secondary); margin-bottom: 6px; }
+.comp-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+.comp-desc { font-size: 13px; color: rgba(255,255,255,.7); line-height: 1.6; margin-bottom: 12px; }
+.comp-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.comp-pill {
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2);
+  border-radius: 20px; padding: 3px 11px; font-size: 11px; font-weight: 600;
+  color: rgba(255,255,255,.8);
+}
+.comp-pill.good { background: rgba(46,125,50,.3); border-color: rgba(46,125,50,.5); color: #81C784; }
+.comp-pill.bad  { background: rgba(194,57,52,.2); border-color: rgba(194,57,52,.4); color: #EF9A9A; }
+
+/* ── SECTION HEADER ── */
+.sec-hd { margin-bottom: 20px; }
+.sec-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: var(--sf-blue); margin-bottom: 4px; }
+.sec-title { font-size: 22px; font-weight: 700; color: var(--text); }
+.sec-sub { font-size: 13px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
+
+/* ── ROI CALCULATOR ── */
+.roi-grid { display: grid; grid-template-columns: 380px 1fr; gap: 20px; margin-bottom: 32px; }
+@media (max-width: 800px) { .roi-grid { grid-template-columns: 1fr; } }
+.roi-inputs { background: var(--card); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+.roi-input-row { margin-bottom: 16px; }
+.roi-input-row:last-child { margin-bottom: 0; }
+.roi-input-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+.roi-input-field {
+  width: 100%; border: 1.5px solid var(--border); border-radius: 6px;
+  padding: 8px 11px; font-size: 14px; font-weight: 600; font-family: inherit;
+  outline: none; transition: .15s;
+}
+.roi-input-field:focus { border-color: var(--sf-blue); }
+.roi-hint { font-size: 10px; color: var(--muted); margin-top: 3px; }
+
+.roi-results { display: flex; flex-direction: column; gap: 12px; }
+.roi-result-card {
+  background: var(--card); border-radius: var(--radius); padding: 18px 22px;
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+  display: flex; align-items: center; gap: 16px;
+}
+.roi-result-card.highlight { background: var(--sf-navy); border-color: var(--sf-navy); }
+.roi-result-ico { font-size: 28px; flex-shrink: 0; }
+.roi-result-body { flex: 1; }
+.roi-result-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 3px; }
+.roi-result-card.highlight .roi-result-label { color: rgba(255,255,255,.5); }
+.roi-result-num { font-size: 28px; font-weight: 800; color: var(--sf-navy); font-family: Georgia, serif; line-height: 1; }
+.roi-result-card.highlight .roi-result-num { color: var(--brand-secondary); }
+.roi-result-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.roi-result-card.highlight .roi-result-sub { color: rgba(255,255,255,.55); }
+
+/* ── CAPABILITY GRID ── */
+.cap-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 32px; }
+@media (max-width: 900px) { .cap-grid { grid-template-columns: repeat(2, 1fr); } }
+.cap-card {
+  background: var(--card); border-radius: var(--radius); padding: 18px 16px;
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+  border-top: 3px solid var(--sf-blue); transition: .2s;
+}
+.cap-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.12); }
+.cap-ico { font-size: 28px; margin-bottom: 10px; }
+.cap-title { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.cap-desc { font-size: 11px; color: var(--muted); line-height: 1.5; }
+.cap-tag { display: inline-block; margin-top: 8px; background: #EEF4FF; color: var(--sf-blue); font-size: 9px; font-weight: 700; padding: 2px 8px; border-radius: 10px; letter-spacing: .3px; }
+
+/* ── AGENT EXAMPLES ── */
+.agent-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 32px; }
+@media (max-width: 800px) { .agent-grid { grid-template-columns: repeat(2, 1fr); } }
+.agent-pill {
+  background: #fff; border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 13px; display: flex; align-items: center; gap: 10px;
+  transition: .15s; cursor: default;
+}
+.agent-pill:hover { border-color: var(--sf-blue); background: #F0F6FF; }
+.agent-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sf-blue); flex-shrink: 0; }
+.agent-name { font-size: 12px; font-weight: 600; color: var(--text); }
+.agent-auto { font-size: 9px; color: var(--muted); margin-top: 1px; }
+
+/* ── COMPARISON TABLE ── */
+.vs-table { width: 100%; border-collapse: collapse; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); margin-bottom: 32px; }
+.vs-table th { padding: 13px 18px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; }
+.vs-table th:first-child { background: #f7f8fa; color: var(--muted); text-align: left; width: 30%; }
+.vs-table th.col-before { background: #FEF2F2; color: #B91C1C; text-align: center; }
+.vs-table th.col-after  { background: #032D60; color: var(--brand-secondary); text-align: center; }
+.vs-table td { padding: 11px 18px; font-size: 12px; border-bottom: 1px solid var(--border); background: #fff; }
+.vs-table td:first-child { color: var(--muted); font-weight: 600; font-size: 11px; text-transform: uppercase; letter-spacing: .3px; }
+.vs-table td.col-before { text-align: center; color: #B91C1C; background: #FFFAFA; }
+.vs-table td.col-after  { text-align: center; color: var(--sf-green); background: #F0FDF4; font-weight: 700; }
+.vs-table tr:last-child td { border-bottom: none; }
+
+/* ── PROOF STATS ── */
+.stat-band {
+  background: var(--sf-navy); border-radius: var(--radius); padding: 28px 32px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+  margin-bottom: 32px; box-shadow: var(--shadow);
+}
+.stat-item { text-align: center; padding: 0 16px; border-right: 1px solid rgba(255,255,255,.1); }
+.stat-item:last-child { border-right: none; }
+.stat-num { font-size: 32px; font-weight: 800; color: var(--brand-secondary); font-family: Georgia, serif; line-height: 1; }
+.stat-lbl { font-size: 10px; color: rgba(255,255,255,.55); text-transform: uppercase; letter-spacing: .8px; margin-top: 5px; }
+
+/* ── PRICING TIER ── */
+.price-section-intro {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-dark));
+  border-radius: var(--radius); padding: 18px 24px; margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  box-shadow: 0 4px 20px rgba(54,124,43,.25);
+}
+.price-offer-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--brand-secondary); margin-bottom: 6px;
+}
+.price-offer-title { font-size: 16px; font-weight: 700; color: #fff; line-height: 1.3; }
+.price-offer-sub { font-size: 11px; color: rgba(255,255,255,.65); margin-top: 3px; }
+.price-offer-pill {
+  background: var(--brand-secondary); color: #000;
+  font-size: 12px; font-weight: 800; padding: 8px 18px; border-radius: 20px;
+  white-space: nowrap; flex-shrink: 0; text-align: center; line-height: 1.3;
+}
+.price-offer-pill span { display: block; font-size: 9px; font-weight: 700; opacity: .7; }
+
+.price-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 12px; }
+@media (max-width: 800px) { .price-grid { grid-template-columns: 1fr; } }
+.price-card {
+  background: var(--card); border-radius: var(--radius); padding: 22px 20px;
+  box-shadow: var(--shadow); border: 1px solid var(--border);
+  display: flex; flex-direction: column; position: relative;
+}
+.price-card.featured { border: 2px solid var(--brand-primary); }
+.price-badge {
+  position: absolute; top: -1px; right: 20px;
+  background: var(--brand-primary); color: var(--brand-secondary);
+  font-size: 9px; font-weight: 800; padding: 3px 10px;
+  border-radius: 0 0 6px 6px; letter-spacing: .5px; text-transform: uppercase;
+}
+.price-audience {
+  display: inline-block; font-size: 9px; font-weight: 800; text-transform: uppercase;
+  letter-spacing: 1px; padding: 2px 8px; border-radius: 10px; margin-bottom: 8px;
+}
+.price-audience.emp  { background: #EEF4FF; color: var(--sf-blue); }
+.price-audience.it   { background: #F0FDF4; color: #15803D; }
+.price-tier  { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 4px; }
+.price-name  { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 10px; line-height: 1.2; }
+.price-row   { display: flex; align-items: baseline; gap: 10px; margin-bottom: 2px; }
+.price-amount        { font-size: 32px; font-weight: 800; color: var(--sf-navy); font-family: Georgia, serif; line-height: 1; }
+.price-amount.dealer { font-size: 32px; font-weight: 800; color: var(--brand-primary); font-family: Georgia, serif; line-height: 1; }
+.price-list-strike   { font-size: 18px; font-weight: 700; color: #ccc; text-decoration: line-through; font-family: Georgia, serif; }
+.price-save-tag {
+  background: #DCFCE7; color: #15803D; font-size: 10px; font-weight: 800;
+  padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+}
+.price-per { font-size: 11px; color: var(--muted); margin-bottom: 14px; }
+.price-rule { height: 1px; background: var(--border); margin: 10px 0 14px; }
+.price-feat { font-size: 11px; color: var(--text); line-height: 1.6; display: flex; gap: 6px; margin-bottom: 5px; }
+.price-feat::before { content: '✓'; color: var(--sf-green); font-weight: 800; flex-shrink: 0; }
+.price-promo {
+  margin-top: auto; padding-top: 12px;
+  background: #FFFBE6; border: 1px solid #F59E0B;
+  border-radius: 6px; padding: 8px 10px; font-size: 10px; color: #7C5000; font-weight: 600; line-height: 1.5;
+}
+.price-footnote {
+  font-size: 10px; color: var(--muted); text-align: center; margin-bottom: 28px; line-height: 1.6;
+}
+.price-footnote strong { color: var(--text); }
+
+/* ── CTA SECTION ── */
+.cta-section {
+  background: linear-gradient(135deg, var(--brand-primary) 0%, var(--brand-dark) 100%);
+  border-radius: var(--radius); padding: 36px 40px;
+  display: flex; align-items: center; justify-content: space-between; gap: 24px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.15); margin-bottom: 12px;
+}
+.cta-body { flex: 1; }
+.cta-eyebrow { font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 6px; }
+.cta-title { font-size: 24px; font-weight: 700; color: #fff; margin-bottom: 6px; line-height: 1.3; }
+.cta-sub { font-size: 13px; color: rgba(255,255,255,.65); line-height: 1.5; }
+.cta-btns { display: flex; flex-direction: column; gap: 10px; flex-shrink: 0; }
+.cta-btn-primary {
+  background: var(--brand-secondary); color: var(--brand-text-on);
+  border: none; border-radius: 7px; padding: 13px 28px;
+  font-size: 14px; font-weight: 800; cursor: pointer; white-space: nowrap;
+  transition: .15s; text-align: center;
+}
+.cta-btn-primary:hover { filter: brightness(1.08); }
+.cta-btn-secondary {
+  background: rgba(255,255,255,.12); color: #fff;
+  border: 1.5px solid rgba(255,255,255,.35); border-radius: 7px; padding: 11px 28px;
+  font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
+  transition: .15s; text-align: center;
+}
+.cta-btn-secondary:hover { background: rgba(255,255,255,.2); }
+
+/* ── FOOTER ── */
+.footer {
+  background: var(--sf-navy); border-top: 3px solid var(--brand-primary);
+  padding: 16px 40px; display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; color: rgba(255,255,255,.4);
+}
+
+/* ── ROI SUMMARY PRINT DOC ── */
+.roi-summary-box {
+  background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+  margin-top: 20px; overflow: hidden; display: none;
+  box-shadow: 0 2px 20px rgba(0,0,0,.08);
+}
+.roi-summary-box.visible { display: block; }
+/* co-branded header: split bar */
+.roi-sum-hdr {
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.roi-sum-hdr-sf {
+  background: var(--sf-navy); padding: 18px 24px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.roi-sum-hdr-jd {
+  background: var(--brand-primary); padding: 18px 24px;
+  display: flex; flex-direction: column; align-items: flex-end; justify-content: center;
+}
+.roi-sum-hdr-logo {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+}
+.roi-sum-hdr-logo img { height: 18px; width: auto; display: block; }
+.roi-sum-hdr-logo-text { font-size: 14px; font-weight: 800; color: #fff; letter-spacing: -.2px; }
+.roi-sum-hdr-product { font-size: 10px; color: rgba(255,255,255,.6); letter-spacing: .3px; }
+.roi-sum-hdr-dealer { font-size: 13px; font-weight: 800; color: var(--brand-secondary); letter-spacing: -.2px; }
+.roi-sum-hdr-sub-jd { font-size: 10px; color: rgba(255,255,255,.65); margin-top: 2px; }
+
+/* title band */
+.roi-sum-title-band {
+  background: #f7f9fc; border-bottom: 1px solid var(--border);
+  padding: 12px 24px; display: flex; align-items: baseline; justify-content: space-between;
+}
+.roi-sum-title { font-size: 16px; font-weight: 800; color: var(--sf-navy); }
+.roi-sum-date  { font-size: 10px; color: var(--muted); }
+
+.roi-sum-body { padding: 18px 24px; }
+
+/* KPI row */
+.roi-sum-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
+.roi-sum-kpi {
+  border-radius: 8px; padding: 11px 13px;
+  border: 1px solid var(--border); border-top: 3px solid var(--sf-blue);
+}
+.roi-sum-kpi.hl-savings  { background: var(--sf-navy); border-color: var(--sf-navy); border-top-color: var(--brand-secondary); }
+.roi-sum-kpi.hl-savings2 { border-top-color: var(--brand-primary); }
+.roi-sum-kpi-lbl { font-size: 8px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin-bottom: 4px; }
+.roi-sum-kpi.hl-savings .roi-sum-kpi-lbl { color: rgba(255,255,255,.5); }
+.roi-sum-kpi-val { font-size: 20px; font-weight: 800; color: var(--sf-navy); font-family: Georgia, serif; line-height: 1; }
+.roi-sum-kpi.hl-savings .roi-sum-kpi-val { color: var(--brand-secondary); }
+.roi-sum-kpi.hl-savings2 .roi-sum-kpi-val { color: var(--brand-primary); }
+.roi-sum-kpi-sub { font-size: 9px; color: var(--muted); margin-top: 3px; line-height: 1.4; }
+.roi-sum-kpi.hl-savings .roi-sum-kpi-sub { color: rgba(255,255,255,.45); }
+
+/* Three column layout */
+.roi-sum-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.roi-sum-col-hd {
+  font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--sf-blue); margin-bottom: 8px; padding-bottom: 5px;
+  border-bottom: 2px solid var(--sf-blue);
+}
+.roi-sum-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 4px 0; border-bottom: 1px solid #f0f0f0; font-size: 11px; gap: 8px; }
+.roi-sum-row:last-child { border: none; }
+.roi-sum-key { color: var(--muted); flex-shrink: 0; }
+.roi-sum-val { font-weight: 700; color: var(--text); text-align: right; }
+
+/* Capabilities strip */
+.roi-sum-caps {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px;
+}
+.roi-sum-cap {
+  background: #f0f6ff; border-radius: 6px; padding: 8px 10px; font-size: 10px;
+  color: var(--sf-blue); font-weight: 700; text-align: center; line-height: 1.4;
+}
+.roi-sum-cap span { display: block; font-size: 14px; margin-bottom: 3px; }
+
+/* Savings bar */
+.roi-sum-savings-bar {
+  background: linear-gradient(135deg, var(--brand-primary), var(--brand-dark));
+  border-radius: 7px; padding: 10px 16px; margin-bottom: 14px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.roi-sum-savings-bar-text { font-size: 11px; font-weight: 700; color: #fff; }
+.roi-sum-savings-bar-text span { color: var(--brand-secondary); font-size: 13px; }
+.roi-sum-savings-bar-sub { font-size: 9px; color: rgba(255,255,255,.65); margin-top: 2px; }
+.roi-sum-savings-pill { background: var(--brand-secondary); color: #000; font-size: 11px; font-weight: 800; padding: 5px 14px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; }
+
+/* Footer */
+.roi-sum-footer {
+  background: #f7f9fc; border-top: 1px solid var(--border);
+  padding: 9px 24px; font-size: 9px; color: var(--muted); line-height: 1.5;
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+}
+.roi-sum-footer-brand { font-size: 10px; font-weight: 800; color: var(--sf-navy); white-space: nowrap; flex-shrink: 0; }
+
+/* ── PRINT ── */
+@media print {
+  .hdr, .hero, .config-band, .main > *:not(.roi-summary-box),
+  .comp-roi-ctx, .roi-grid, .stat-band, .cap-grid, .agent-grid,
+  .vs-table, .price-section-intro, .price-grid, .price-footnote,
+  .cta-section, .footer, .modal-overlay { display: none !important; }
+  .main { padding: 0 !important; max-width: 100% !important; }
+  .roi-summary-box { display: block !important; border: none !important; box-shadow: none !important; margin: 0 !important; border-radius: 0 !important; }
+  .roi-sum-hdr-sf, .roi-sum-hdr-jd, .roi-sum-kpi.hl-savings, .roi-sum-savings-bar,
+  .roi-sum-hdr-logo img, .roi-sum-col-hd { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  @page { margin: 0.4in; size: letter portrait; }
+}
+
+/* ── DEMO MODAL ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.55); z-index: 1000; align-items: center; justify-content: center;
+}
+.modal-overlay.open { display: flex; }
+.modal {
+  background: #fff; border-radius: 12px; width: 480px; max-width: 95vw;
+  box-shadow: 0 24px 80px rgba(0,0,0,.3); overflow: hidden;
+  animation: modalIn .2s ease;
+}
+@keyframes modalIn { from { opacity:0; transform: translateY(16px) scale(.97); } to { opacity:1; transform: none; } }
+.modal-hdr {
+  background: var(--sf-navy); padding: 18px 24px;
+  display: flex; align-items: flex-start; justify-content: space-between;
+}
+.modal-hdr-title { font-size: 16px; font-weight: 700; color: #fff; }
+.modal-hdr-sub { font-size: 11px; color: rgba(255,255,255,.55); margin-top: 2px; }
+.modal-close {
+  background: none; border: none; color: rgba(255,255,255,.5); font-size: 20px;
+  cursor: pointer; line-height: 1; padding: 0; margin-left: 12px; flex-shrink: 0;
+}
+.modal-close:hover { color: #fff; }
+.modal-body { padding: 20px 24px; }
+.modal-roi-preview {
+  background: #f0f6ff; border-radius: 7px; padding: 10px 14px; margin-bottom: 16px;
+  font-size: 11px; color: var(--sf-blue); line-height: 1.6;
+  border-left: 3px solid var(--sf-blue);
+}
+.modal-field { margin-bottom: 13px; }
+.modal-label { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 4px; }
+.modal-input {
+  width: 100%; border: 1.5px solid var(--border); border-radius: 6px;
+  padding: 8px 11px; font-size: 13px; font-family: inherit; outline: none; transition: .15s;
+}
+.modal-input:focus { border-color: var(--sf-blue); box-shadow: 0 0 0 3px rgba(0,112,210,.1); }
+.modal-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.modal-footer { padding: 0 24px 20px; display: flex; gap: 10px; }
+.modal-submit {
+  flex: 1; background: var(--brand-primary); color: var(--brand-secondary);
+  border: none; border-radius: 7px; padding: 12px; font-size: 14px; font-weight: 800;
+  cursor: pointer; transition: .15s;
+}
+.modal-submit:hover { background: var(--brand-dark); }
+.modal-cancel {
+  background: none; border: 1.5px solid var(--border); border-radius: 7px;
+  padding: 12px 18px; font-size: 13px; font-weight: 600; cursor: pointer; color: var(--muted);
+  transition: .15s;
+}
+.modal-cancel:hover { border-color: var(--muted); }
+
+/* ── SEE IT LIVE: VIDEO + CUSTOMER WALL ── */
+.sil-tabs { display: flex; gap: 0; border-bottom: 2px solid var(--border); margin-bottom: 24px; }
+.sil-tab {
+  padding: 10px 22px; font-size: 13px; font-weight: 700; color: var(--muted);
+  border-bottom: 3px solid transparent; margin-bottom: -2px; cursor: pointer;
+  transition: .15s; user-select: none;
+}
+.sil-tab:hover { color: var(--sf-blue); }
+.sil-tab.active { color: var(--sf-blue); border-bottom-color: var(--sf-blue); }
+
+.sil-panel { display: none; }
+.sil-panel.active { display: block; }
+
+/* Video panel */
+.sil-video-wrap {
+  background: #000; border-radius: var(--radius); overflow: hidden;
+  position: relative; padding-top: 56.25%; /* 16:9 */
+  box-shadow: 0 8px 32px rgba(0,0,0,.2); margin-bottom: 16px;
+}
+.sil-video-wrap iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+}
+.sil-video-links { display: flex; gap: 12px; flex-wrap: wrap; }
+.sil-video-link {
+  background: var(--card); border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 14px; display: flex; align-items: center; gap: 10px;
+  text-decoration: none; color: var(--text); transition: .15s; flex: 1; min-width: 200px;
+}
+.sil-video-link:hover { border-color: var(--sf-blue); background: #f0f6ff; }
+.sil-video-link-ico { font-size: 20px; flex-shrink: 0; }
+.sil-video-link-title { font-size: 12px; font-weight: 700; color: var(--text); }
+.sil-video-link-sub { font-size: 10px; color: var(--muted); margin-top: 1px; }
+
+/* Customer wall */
+.sil-stat-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+  margin-bottom: 24px;
+}
+.sil-stat-item {
+  background: var(--sf-navy); border-radius: 8px; padding: 14px 16px; text-align: center;
+}
+.sil-stat-num { font-size: 26px; font-weight: 800; color: var(--brand-secondary); font-family: Georgia, serif; line-height: 1; }
+.sil-stat-lbl { font-size: 10px; color: rgba(255,255,255,.55); margin-top: 4px; line-height: 1.4; }
+
+.sil-customer-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 8px;
+}
+@media (max-width: 900px) { .sil-customer-grid { grid-template-columns: repeat(2, 1fr); } }
+.sil-customer-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 18px 16px; display: flex; flex-direction: column; gap: 10px;
+  box-shadow: var(--shadow); transition: .2s;
+}
+.sil-customer-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.1); }
+.sil-customer-logo-area {
+  height: 40px; display: flex; align-items: center;
+}
+.sil-customer-logo-area img {
+  max-height: 32px; max-width: 120px; width: auto; object-fit: contain; filter: grayscale(1); opacity: .7;
+  transition: .2s;
+}
+.sil-customer-card:hover .sil-customer-logo-area img { filter: none; opacity: 1; }
+.sil-customer-name { font-size: 13px; font-weight: 800; color: var(--text); }
+.sil-customer-industry { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; margin-top: -6px; }
+.sil-customer-quote {
+  font-size: 11px; color: var(--muted); line-height: 1.5; font-style: italic;
+  border-left: 2px solid var(--brand-secondary); padding-left: 8px; flex: 1;
+}
+.sil-customer-stat {
+  background: #EEF4FF; border-radius: 6px; padding: 5px 9px;
+  font-size: 10px; font-weight: 700; color: var(--sf-blue); text-align: center;
+}
+
+/* ── COMP ROI CONTEXT ── */
+.comp-roi-ctx {
+  display: none; margin-bottom: 20px;
+  background: var(--sf-navy); border-radius: var(--radius);
+  border-left: 4px solid var(--brand-secondary);
+  padding: 16px 20px;
+}
+.comp-roi-ctx.visible { display: block; }
+.comp-roi-ctx-title {
+  font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--brand-secondary); margin-bottom: 10px;
+}
+.comp-roi-ctx-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+}
+@media (max-width:800px) { .comp-roi-ctx-grid { grid-template-columns: 1fr; } }
+.comp-roi-ctx-item {
+  background: rgba(255,255,255,.06); border-radius: 7px; padding: 10px 13px;
+}
+.comp-roi-ctx-lbl {
+  font-size: 9px; font-weight: 800; text-transform: uppercase; letter-spacing: .8px;
+  color: rgba(255,255,255,.45); margin-bottom: 4px;
+}
+.comp-roi-ctx-val {
+  font-size: 15px; font-weight: 800; color: #fff; line-height: 1.2;
+}
+.comp-roi-ctx-sub {
+  font-size: 10px; color: rgba(255,255,255,.45); margin-top: 3px; line-height: 1.4;
+}
+.comp-roi-ctx-note {
+  font-size: 10px; color: rgba(255,255,255,.4); margin-top: 10px; line-height: 1.5;
+  border-top: 1px solid rgba(255,255,255,.08); padding-top: 8px;
+}
+
+/* ── UTILITY ── */
+.card { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--border); padding: 24px; margin-bottom: 28px; }
+.tag { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 700; }
+.tag-blue { background: #EEF4FF; color: var(--sf-blue); }
+.tag-green { background: #DCFCE7; color: #15803D; }
+.tag-yellow { background: #FEFCE8; color: #A16207; }
+.tag-red { background: #FEF2F2; color: #B91C1C; }
+.divider { height: 1px; background: var(--border); margin: 28px 0; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-left">
+    <div class="sf-cloud-logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg"
+           alt="Salesforce" style="height:22px;width:auto;display:block;"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+      <span class="sf-wordmark" style="display:none;">Salesforce</span>
+    </div>
+    <div class="hdr-divider"></div>
+    <span class="hdr-product">Agentforce IT Service</span>
+  </div>
+  <div class="dealer-badge" id="dealer-badge">John Deere Dealer Program</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <div class="hero-eyebrow">Prepared for <span id="hero-dealer-name">Your Dealership</span></div>
+      <div class="hero-title">The IT platform that <strong>pays for itself</strong><br>— and runs itself.</div>
+      <div class="hero-sub">Agentforce IT Service is the best-in-class ITSM for IT leaders who want to maximize employee experience and asset management without adding headcount. Transparent subscription pricing. AI case deflection that returns more than it costs. Built on the world's #1 service platform — self-sustaining from day one.</div>
+    </div>
+    <div class="hero-photos">
+      <img src="https://www.deere.com/assets/images/region-4/industries/agriculture/sugar-harvester/r4k072428_rrd-1024x576.jpg"
+           alt="John Deere sugar cane harvest" referrerpolicy="no-referrer"
+           onerror="this.style.opacity='.15'">
+      <img src="https://www.deere.com/assets/images/common/industries/agriculture/r2g085102-spfh-ag-carousel-1024x576.jpg"
+           alt="John Deere operator in field" referrerpolicy="no-referrer"
+           onerror="this.style.opacity='.15'">
+      <img src="https://www.deere.com/assets/images/common/news/generic-news-icons-2025/US-impact-768x432.jpg"
+           alt="John Deere worker and field" referrerpolicy="no-referrer"
+           onerror="this.style.opacity='.15'">
+    </div>
+  </div>
+</div>
+
+<!-- CONFIGURATOR BAND -->
+<div class="config-band">
+  <div class="config-inner">
+    <div>
+      <div class="config-label">Your Dealership Name</div>
+      <input class="config-input" id="cfg-dealer" type="text" placeholder="e.g. Ag-Pro Companies" oninput="updateDealer(this.value)">
+    </div>
+    <div>
+      <div class="config-label">Number of Employees</div>
+      <input class="config-input" id="cfg-employees" type="number" min="1" placeholder="e.g. 250" oninput="recalcROI()">
+    </div>
+    <div>
+      <div class="config-label">Current IT Solution</div>
+      <select class="config-select" id="cfg-competitor" onchange="updateCompetitor(this.value)">
+        <option value="">— Select your current tool —</option>
+        <option value="servicenow">ServiceNow</option>
+        <option value="jira">Atlassian / Jira Service Management</option>
+        <option value="freshservice">Freshservice / Freshworks</option>
+        <option value="cherwell">Ivanti / Cherwell (EOL)</option>
+        <option value="remedy">BMC Remedy / Helix (EOL)</option>
+        <option value="remedyforce">Remedyforce</option>
+        <option value="email">Email / Spreadsheets / Ad Hoc</option>
+        <option value="none">No formal ITSM today</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <button class="config-btn" onclick="recalcROI()">Calculate ROI →</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- COMPETITOR SPOTLIGHT -->
+  <div class="competitor-card" id="comp-card">
+    <div class="comp-ico" id="comp-ico">🔄</div>
+    <div class="comp-body">
+      <div class="comp-eyebrow" id="comp-eyebrow">Migration Path</div>
+      <div class="comp-title" id="comp-title">Switching from your current tool</div>
+      <div class="comp-desc" id="comp-desc"></div>
+      <div class="comp-pills" id="comp-pills"></div>
+    </div>
+  </div>
+
+  <!-- ROI CALCULATOR -->
+  <div class="sec-hd">
+    <div class="sec-eyebrow">Business Value</div>
+    <div class="sec-title">See what Agentforce IT Service costs — and what it returns</div>
+    <div class="sec-sub">We show you the full subscription cost up front, then calculate what AI case deflection gets back. No hidden fees, no surprises.</div>
+  </div>
+
+  <!-- COMPETITIVE ROI CONTEXT (shown when competitor selected) -->
+  <div class="comp-roi-ctx" id="comp-roi-ctx">
+    <div class="comp-roi-ctx-title" id="comp-roi-ctx-title">How your current spend compares</div>
+    <div class="comp-roi-ctx-grid" id="comp-roi-ctx-grid"></div>
+    <div class="comp-roi-ctx-note" id="comp-roi-ctx-note"></div>
+  </div>
+
+  <div class="roi-grid">
+    <div class="roi-inputs">
+      <div style="background:#EEF4FF;border-radius:7px;padding:10px 12px;margin-bottom:16px;font-size:11px;color:var(--sf-blue);line-height:1.5;">
+        <strong>How this works:</strong> We show your estimated Salesforce subscription cost, then calculate how much IT labor value AI case deflection returns — so you see net ROI clearly.
+      </div>
+      <div class="roi-input-row">
+        <div class="roi-input-label">Total Employees</div>
+        <input class="roi-input-field" id="roi-emp" type="number" value="250" oninput="syncAndRecalc('roi-emp','cfg-employees')">
+        <div class="roi-hint">Drives AI Agents for Employees cost ($3/emp/mo dealer · $15 list)</div>
+      </div>
+      <div class="roi-input-row">
+        <div class="roi-input-label">IT Staff / Fulfillers</div>
+        <input class="roi-input-field" id="roi-it" type="number" value="5" oninput="recalcROI()">
+        <div class="roi-hint">Drives IT Service Desk cost ($75/fulfiller/mo)</div>
+      </div>
+      <div class="roi-input-row">
+        <div class="roi-input-label">Avg IT Staff Hourly Rate ($)</div>
+        <input class="roi-input-field" id="roi-rate" type="number" value="45" oninput="recalcROI()">
+        <div class="roi-hint">Loaded hourly cost — used to value deflected work</div>
+      </div>
+      <div class="roi-input-row">
+        <div class="roi-input-label">Tickets / Employee / Month</div>
+        <input class="roi-input-field" id="roi-tickets" type="number" value="2" oninput="recalcROI()">
+        <div class="roi-hint">Typical: 1–4 for dealer environment</div>
+      </div>
+      <div class="roi-input-row">
+        <div class="roi-input-label">Avg Resolution Time / Ticket (hrs)</div>
+        <input class="roi-input-field" id="roi-resolve" type="number" value="1.5" step="0.5" oninput="recalcROI()">
+        <div class="roi-hint">End-to-end including routing and back-and-forth</div>
+      </div>
+    </div>
+
+    <div class="roi-results" id="roi-results">
+      <div class="roi-result-card" style="background:#F0FDF4;border-color:#bbf7d0;">
+        <div class="roi-result-ico">🧾</div>
+        <div class="roi-result-body">
+          <div class="roi-result-label" style="color:#166534;">Est. Annual Subscription (Dealer Price)</div>
+          <div class="roi-result-num" id="res-sfcost" style="color:#166534;">—</div>
+          <div class="roi-result-sub" id="res-sfcost-sub">$75/IT fulfiller/mo + $3/employee/mo (dealer offer)</div>
+        </div>
+      </div>
+      <div class="roi-result-card" style="background:#FEFCE8;border-color:#fde68a;">
+        <div class="roi-result-ico">🏷️</div>
+        <div class="roi-result-body">
+          <div class="roi-result-label" style="color:#92400E;">Your Dealer Savings vs. List</div>
+          <div class="roi-result-num" id="res-emp-savings" style="color:#92400E;">—</div>
+          <div class="roi-result-sub">$3/emp/mo dealer vs. $15/emp/mo list price</div>
+        </div>
+      </div>
+      <div class="roi-result-card highlight">
+        <div class="roi-result-ico">💰</div>
+        <div class="roi-result-body">
+          <div class="roi-result-label">Value Returned by Case Deflection</div>
+          <div class="roi-result-num" id="res-savings">—</div>
+          <div class="roi-result-sub">IT labor value of auto-resolved cases/yr</div>
+        </div>
+      </div>
+      <div class="roi-result-card">
+        <div class="roi-result-ico">📈</div>
+        <div class="roi-result-body">
+          <div class="roi-result-label">Net ROI</div>
+          <div class="roi-result-num" id="res-roi" style="color:var(--sf-navy);">—</div>
+          <div class="roi-result-sub">Return on subscription investment</div>
+        </div>
+      </div>
+      <div class="roi-result-card">
+        <div class="roi-result-ico">⏱</div>
+        <div class="roi-result-body">
+          <div class="roi-result-label">Payback Period</div>
+          <div class="roi-result-num" id="res-payback" style="color:var(--sf-navy);">—</div>
+          <div class="roi-result-sub">Months until deflection covers subscription</div>
+        </div>
+      </div>
+      <div class="roi-result-card">
+        <div class="roi-result-ico">🎫</div>
+        <div class="roi-result-body">
+          <div class="roi-result-label">Cases Auto-Resolved / Month</div>
+          <div class="roi-result-num" id="res-deflect" style="color:var(--sf-navy);">—</div>
+          <div class="roi-result-sub">40% AI deflection — no IT touch required</div>
+        </div>
+      </div>
+      <div class="roi-result-card">
+        <div class="roi-result-ico">⚡</div>
+        <div class="roi-result-body">
+          <div class="roi-result-label">IT Capacity Freed / Month</div>
+          <div class="roi-result-num" id="res-hours" style="color:var(--sf-navy);">—</div>
+          <div class="roi-result-sub">Hours redirected to strategic projects</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROOF STATS -->
+  <div class="stat-band">
+    <div class="stat-item"><div class="stat-num">40%+</div><div class="stat-lbl">Cases auto-resolved by AI — no IT touch</div></div>
+    <div class="stat-item"><div class="stat-num">50+</div><div class="stat-lbl">Out-of-box AI agents, ready day one</div></div>
+    <div class="stat-item"><div class="stat-num">240+</div><div class="stat-lbl">Connectors to existing tools (MuleSoft)</div></div>
+    <div class="stat-item"><div class="stat-num">Weeks</div><div class="stat-lbl">Typical deployment — not months of consulting</div></div>
+  </div>
+
+  <!-- CAPABILITIES -->
+  <div class="sec-hd">
+    <div class="sec-eyebrow">Platform Capabilities</div>
+    <div class="sec-title">Everything your dealer IT team needs — one platform</div>
+    <div class="sec-sub">Built on Service Cloud, the #1 service platform. Self-sustaining by design — AI handles the routine so your IT team focuses on what matters.</div>
+  </div>
+
+  <div class="cap-grid">
+    <div class="cap-card">
+      <div class="cap-ico">🎫</div>
+      <div class="cap-title">IT Service Desk</div>
+      <div class="cap-desc">Full ITIL lifecycle — Incident, Problem, Change, Release, Request, and Knowledge Management. Every ticket tracked, every SLA measured.</div>
+      <span class="cap-tag">ITIL Certified</span>
+    </div>
+    <div class="cap-card" style="border-top-color:var(--brand-primary);">
+      <div class="cap-ico">🤖</div>
+      <div class="cap-title">AI Agents for Employees</div>
+      <div class="cap-desc">50+ out-of-box agents deflect 40%+ of IT cases — password resets, software provisioning, device requests — resolved in Slack or Teams without a ticket ever reaching your team.</div>
+      <span class="cap-tag" style="background:#F0FDF4;color:#15803D;">AI-Powered</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-ico">🔬</div>
+      <div class="cap-title">AI for IT Teams</div>
+      <div class="cap-desc">Automatic incident summaries, root cause analysis, SLA breach prediction, and next-best-action recommendations — surfaced before your team even asks.</div>
+      <span class="cap-tag">Predictive AI</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-ico">🗺️</div>
+      <div class="cap-title">CMDB &amp; Discovery</div>
+      <div class="cap-desc">200+ CI classes, agentless and agent-based discovery, native AWS/Azure/VMware integrations. Know every asset across every location.</div>
+      <span class="cap-tag">Agentic CMDB</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-ico">💬</div>
+      <div class="cap-title">Slack &amp; Teams Native</div>
+      <div class="cap-desc">Meet employees where they already work. AI agents live in Slack or Teams — no new portal, no new login, no ticket form to fill out.</div>
+      <span class="cap-tag">Conversational-First</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-ico">📊</div>
+      <div class="cap-title">Unified Service Platform</div>
+      <div class="cap-desc">IT, HR, and Facilities service in one place. One platform, one contract, one vendor. Stop managing three tools to do one job.</div>
+      <span class="cap-tag">One Platform</span>
+    </div>
+    <div class="cap-card">
+      <div class="cap-ico">🔌</div>
+      <div class="cap-title">240+ Connectors</div>
+      <div class="cap-desc">MuleSoft connectors for your DMS, ERP, and dealership systems. Works with what you have — no rip-and-replace required to get started.</div>
+      <span class="cap-tag">MuleSoft Included</span>
+    </div>
+    <div class="cap-card" style="border-top-color:var(--sf-yellow);">
+      <div class="cap-ico">⚡</div>
+      <div class="cap-title">Minutes, Not Months</div>
+      <div class="cap-desc">Salesforce Go Configuration Assistant gets you live fast. No long implementation. No army of consultants. Standard dealer deployments measured in weeks.</div>
+      <span class="cap-tag" style="background:#FEFCE8;color:#A16207;">Fast Time-to-Value</span>
+    </div>
+  </div>
+
+  <!-- AI AGENTS EXAMPLES -->
+  <div class="sec-hd">
+    <div class="sec-eyebrow">Out-of-Box AI Agents</div>
+    <div class="sec-title">50+ agents ready on day one — no training required</div>
+    <div class="sec-sub">Each agent handles a specific IT task autonomously, in natural language, across Slack or Teams.</div>
+  </div>
+  <div class="agent-grid">
+    <div class="agent-pill"><div class="agent-dot"></div><div><div class="agent-name">Password Reset</div><div class="agent-auto">Fully automated · 0 IT touches</div></div></div>
+    <div class="agent-pill"><div class="agent-dot"></div><div><div class="agent-name">Account Lockout / IAM</div><div class="agent-auto">Active Directory + Azure AD</div></div></div>
+    <div class="agent-pill"><div class="agent-dot"></div><div><div class="agent-name">Software Provisioning</div><div class="agent-auto">Request, approve &amp; install</div></div></div>
+    <div class="agent-pill"><div class="agent-dot"></div><div><div class="agent-name">Hardware Request</div><div class="agent-auto">Asset catalog + approval workflow</div></div></div>
+    <div class="agent-pill"><div class="agent-dot"></div><div><div class="agent-name">Device Troubleshooting</div><div class="agent-auto">Guided remote resolution</div></div></div>
+    <div class="agent-pill"><div class="agent-dot" style="background:#22c55e;"></div><div><div class="agent-name">New Employee Onboarding</div><div class="agent-auto">Day-1 access, devices &amp; accounts</div></div></div>
+    <div class="agent-pill"><div class="agent-dot" style="background:#22c55e;"></div><div><div class="agent-name">Employee Offboarding</div><div class="agent-auto">Automated license reclaim</div></div></div>
+    <div class="agent-pill"><div class="agent-dot"></div><div><div class="agent-name">Root Cause Analysis</div><div class="agent-auto">AI-generated RCA on incident open</div></div></div>
+    <div class="agent-pill"><div class="agent-dot"></div><div><div class="agent-name">Incident Triage</div><div class="agent-auto">Priority + routing + similar cases</div></div></div>
+    <div class="agent-pill"><div class="agent-dot" style="background:#f59e0b;"></div><div><div class="agent-name">Change Management</div><div class="agent-auto">CAB workflow + risk scoring</div></div></div>
+    <div class="agent-pill"><div class="agent-dot"></div><div><div class="agent-name">Email Phishing Response</div><div class="agent-auto">Triage + quarantine + notify</div></div></div>
+    <div class="agent-pill"><div class="agent-dot" style="background:#f59e0b;"></div><div><div class="agent-name">License Reclamation</div><div class="agent-auto">Find &amp; recover unused software</div></div></div>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div class="sec-hd">
+    <div class="sec-eyebrow">The Transformation</div>
+    <div class="sec-title">IT support before and after Agentforce</div>
+  </div>
+  <table class="vs-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="col-before" id="vs-before-hdr">Today</th>
+        <th class="col-after">With Agentforce IT Service</th>
+      </tr>
+    </thead>
+    <tbody id="vs-tbody">
+      <tr><td>Employee Experience</td><td class="col-before">Email IT, wait hours or days</td><td class="col-after">Ask Slack/Teams, resolved in seconds</td></tr>
+      <tr><td>Case Deflection</td><td class="col-before">Every request reaches IT manually</td><td class="col-after">40%+ cases auto-resolved by AI agents</td></tr>
+      <tr><td>Onboarding New Staff</td><td class="col-before">IT manually provisions each account</td><td class="col-after">AI agent handles all day-1 access automatically</td></tr>
+      <tr><td>Asset Visibility</td><td class="col-before">Spreadsheet or none</td><td class="col-after">Live CMDB — every device, every location</td></tr>
+      <tr><td>Password Resets</td><td class="col-before">Call or ticket to IT — 15–30 min</td><td class="col-after">Self-service in Slack — under 60 seconds</td></tr>
+      <tr><td>Incident Intelligence</td><td class="col-before">IT investigates manually</td><td class="col-after">AI generates RCA + similar cases instantly</td></tr>
+      <tr><td>Multi-location Support</td><td class="col-before">Inconsistent, location-dependent</td><td class="col-after">Uniform AI-powered support across all sites</td></tr>
+      <tr><td>IT Staff Focus</td><td class="col-before">Reactive — Level 1 tickets dominate</td><td class="col-after">Strategic work — AI handles the routine</td></tr>
+      <tr><td>Subscription Transparency</td><td class="col-before">Opaque pricing, annual renegotiation</td><td class="col-after">Clear per-seat pricing — budget with confidence</td></tr>
+    </tbody>
+  </table>
+
+  <!-- PRICING -->
+  <div class="sec-hd">
+    <div class="sec-eyebrow">Simple, Scalable Pricing</div>
+    <div class="sec-title">Two license types. One complete platform.</div>
+    <div class="sec-sub">General employees get AI self-service in Slack. Your IT team gets the full service desk. No forced bundles — start with what you need.</div>
+  </div>
+
+  <!-- Special offer banner -->
+  <div class="price-section-intro">
+    <div>
+      <div class="price-offer-badge">🎁 Special Offer · John Deere Dealer Program</div>
+      <div class="price-offer-title">$3/employee/month — 80% off list price on AI Agents for Employees</div>
+      <div class="price-offer-sub">Exclusively for John Deere dealers. Minimum 100 users. Contact your Salesforce AE to activate.</div>
+    </div>
+    <div class="price-offer-pill">
+      $3<span>vs. $15 list</span>
+    </div>
+  </div>
+
+  <div class="price-grid">
+
+    <!-- Card 1: General employees -->
+    <div class="price-card featured">
+      <div class="price-badge">Special Dealer Price</div>
+      <span class="price-audience emp">For All Employees</span>
+      <div class="price-tier">AI Self-Service</div>
+      <div class="price-name">AI Agents for Employees</div>
+      <div class="price-row">
+        <div class="price-amount dealer">$3</div>
+        <div class="price-list-strike">$15</div>
+        <span class="price-save-tag">Save 80%</span>
+      </div>
+      <div class="price-per">per employee / month · min. 100 users</div>
+      <div class="price-rule"></div>
+      <div class="price-feat">AI resolves IT requests in <strong>Slack</strong> — no ticket, no portal</div>
+      <div class="price-feat">Password resets, account unlocks, software requests</div>
+      <div class="price-feat">50+ out-of-box agents — active day one</div>
+      <div class="price-feat">Works alongside any existing ITSM tool</div>
+      <div class="price-feat">Deflects 40%+ of cases before IT is ever involved</div>
+      <div class="price-promo">🤝 Dealer exclusive: $3/emp/mo vs. $15 list. Requires 100+ users. Talk to your AE to unlock.</div>
+    </div>
+
+    <!-- Card 2: IT Service Desk EE -->
+    <div class="price-card featured" style="border-color:var(--sf-blue);">
+      <div class="price-badge" style="background:var(--sf-blue);color:#fff;">Best Value for IT</div>
+      <span class="price-audience it">For IT Staff / Fulfillers</span>
+      <div class="price-tier">Full ITSM Platform</div>
+      <div class="price-name">IT Service Desk EE</div>
+      <div class="price-row">
+        <div class="price-amount">$75</div>
+      </div>
+      <div class="price-per">per IT fulfiller / month · list price</div>
+      <div class="price-rule"></div>
+      <div class="price-feat">Full ITIL — Incident, Problem, Change, Release</div>
+      <div class="price-feat">CMDB + Agentless Discovery included</div>
+      <div class="price-feat">AI agents for IT fulfillers (RCA, triage, SLA)</div>
+      <div class="price-feat">Knowledge Management + self-service portal</div>
+      <div class="price-feat">Live dashboards &amp; SLA tracking</div>
+      <div class="price-feat"><strong>Slack-native</strong> — cases, alerts &amp; approvals in channels</div>
+      <div class="price-promo">🎁 Promo: $50K ACV → 1M MuleSoft Credits + 5M Agentforce Flex Credits included</div>
+    </div>
+
+    <!-- Card 3: IT Service Desk UE -->
+    <div class="price-card">
+      <span class="price-audience it">For IT Staff / Fulfillers</span>
+      <div class="price-tier">Enterprise ITSM</div>
+      <div class="price-name">IT Service Desk UE</div>
+      <div class="price-row">
+        <div class="price-amount">$150</div>
+      </div>
+      <div class="price-per">per IT fulfiller / month · list price</div>
+      <div class="price-rule"></div>
+      <div class="price-feat">Everything in EE</div>
+      <div class="price-feat">Predictive AI — SLA breach &amp; incident risk scoring</div>
+      <div class="price-feat">Tableau dashboards built-in</div>
+      <div class="price-feat">Developer Sandbox</div>
+      <div class="price-feat">Premier Success Plan included</div>
+      <div class="price-feat"><strong>Slack-native</strong> — full workflow automation in channels</div>
+    </div>
+
+  </div>
+  <div class="price-footnote">
+    <strong>How to read this:</strong> Every employee gets the AI self-service license ($3 dealer / $15 list). Your IT team also gets an IT Service Desk license ($75 or $150). A 250-person dealership with 5 IT staff = 250 × $3 + 5 × $75 = <strong id="price-example-calc">$1,125/mo</strong> with the dealer offer.<br>
+    <span id="price-footnote-dynamic"></span>Dealer pricing requires minimum 100 users and activation by your Salesforce AE. Pricing shown is directional — contact your AE for a formal quote.
+  </div>
+
+  <!-- ROI SUMMARY (1-page print doc) -->
+  <div class="roi-summary-box" id="roi-summary">
+
+    <!-- Co-branded header: Salesforce left, John Deere right -->
+    <div class="roi-sum-hdr">
+      <div class="roi-sum-hdr-sf">
+        <div class="roi-sum-hdr-logo">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg" alt="Salesforce"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="roi-sum-hdr-product">Agentforce IT Service · Business Value Assessment</div>
+      </div>
+      <div class="roi-sum-hdr-jd">
+        <div class="roi-sum-hdr-dealer" id="roi-sum-badge">John Deere Dealer Program</div>
+        <div class="roi-sum-hdr-sub-jd">Prepared exclusively for your dealership</div>
+      </div>
+    </div>
+
+    <!-- Title band -->
+    <div class="roi-sum-title-band">
+      <div class="roi-sum-title" id="roi-sum-title">ROI Summary — Your Dealership</div>
+      <div class="roi-sum-date" id="roi-sum-date"></div>
+    </div>
+
+    <div class="roi-sum-body">
+
+      <!-- KPI tiles -->
+      <div class="roi-sum-kpis">
+        <div class="roi-sum-kpi hl-savings">
+          <div class="roi-sum-kpi-lbl">Deflection Value / Year</div>
+          <div class="roi-sum-kpi-val" id="sum-kpi-savings">—</div>
+          <div class="roi-sum-kpi-sub">Labor value of auto-resolved cases</div>
+        </div>
+        <div class="roi-sum-kpi">
+          <div class="roi-sum-kpi-lbl">Annual Subscription</div>
+          <div class="roi-sum-kpi-val" id="sum-kpi-cost">—</div>
+          <div class="roi-sum-kpi-sub">At dealer pricing</div>
+        </div>
+        <div class="roi-sum-kpi">
+          <div class="roi-sum-kpi-lbl">Net ROI</div>
+          <div class="roi-sum-kpi-val" id="sum-kpi-roi">—</div>
+          <div class="roi-sum-kpi-sub">Return on subscription</div>
+        </div>
+        <div class="roi-sum-kpi hl-savings2">
+          <div class="roi-sum-kpi-lbl">Dealer Savings vs. List</div>
+          <div class="roi-sum-kpi-val" id="sum-kpi-dealer-savings">—</div>
+          <div class="roi-sum-kpi-sub">$3/emp vs. $15 list · annual</div>
+        </div>
+      </div>
+
+      <!-- Dealer savings bar -->
+      <div class="roi-sum-savings-bar">
+        <div>
+          <div class="roi-sum-savings-bar-text">Special offer: <span id="sum-bar-savings-text">80% off</span> on AI Agents for Employees</div>
+          <div class="roi-sum-savings-bar-sub">$3/employee/month dealer price · $15/month list · minimum 100 users · exclusive to John Deere dealers</div>
+        </div>
+        <div class="roi-sum-savings-pill" id="sum-bar-pill">Save $12/emp/mo</div>
+      </div>
+
+      <!-- Three columns: environment · value · pricing -->
+      <div class="roi-sum-cols">
+        <div>
+          <div class="roi-sum-col-hd">Your Environment</div>
+          <div id="roi-sum-env-rows"></div>
+        </div>
+        <div>
+          <div class="roi-sum-col-hd">Value from Case Deflection</div>
+          <div id="roi-sum-value-rows"></div>
+        </div>
+        <div>
+          <div class="roi-sum-col-hd" id="roi-sum-comp-title">Salesforce Subscription</div>
+          <div id="roi-sum-comp-rows"></div>
+        </div>
+      </div>
+
+      <!-- Capabilities strip -->
+      <div class="roi-sum-caps">
+        <div class="roi-sum-cap"><span>🤖</span>50+ AI Agents<br>Out of Box</div>
+        <div class="roi-sum-cap"><span>💬</span>Slack &amp; Teams<br>Native</div>
+        <div class="roi-sum-cap"><span>🗺️</span>CMDB +<br>Discovery</div>
+        <div class="roi-sum-cap"><span>⚡</span>Deployed in<br>Weeks</div>
+      </div>
+
+    </div>
+
+    <div class="roi-sum-footer">
+      <span>Directional estimates based on Salesforce BVA benchmarks. 40% AI deflection rate. $75/IT fulfiller/mo (IT Service Desk EE) · $3/emp/mo dealer offer (list $15) · min. 100 users. Contact your Salesforce AE for a formal quote.</span>
+      <div class="roi-sum-footer-brand">Salesforce · Agentforce IT Service</div>
+    </div>
+
+  </div>
+
+  <!-- SEE IT LIVE: VIDEO + CUSTOMER WALL -->
+  <div class="sec-hd">
+    <div class="sec-eyebrow">See It Live</div>
+    <div class="sec-title">Watch the demo. Hear from customers.</div>
+    <div class="sec-sub">Real product, real results — from companies already running Agentforce IT Service.</div>
+  </div>
+
+  <div class="sil-tabs">
+    <div class="sil-tab active" onclick="silTab('video',this)">▶ Product Demo</div>
+    <div class="sil-tab" onclick="silTab('customers',this)">🏆 Customer Stories</div>
+  </div>
+
+  <!-- VIDEO PANEL -->
+  <div class="sil-panel active" id="sil-video">
+    <div class="sil-video-wrap">
+      <iframe
+        src="https://play.vidyard.com/Y9ojZ8XrbpYsvpgo4oiMPe.html?autoplay=0"
+        allowfullscreen
+        allow="autoplay; fullscreen"
+        title="Agentforce IT Service Demo">
+      </iframe>
+    </div>
+    <div class="sil-video-links">
+      <a class="sil-video-link" href="https://www.salesforce.com/plus/experience/dreamforce_2025/series/service_at_dreamforce_2025/episode/episode-s1e6" target="_blank">
+        <div class="sil-video-link-ico">🎤</div>
+        <div>
+          <div class="sil-video-link-title">Reinvent Employee Experiences — Dreamforce 2025 Keynote</div>
+          <div class="sil-video-link-sub">SVP & GM Muddu Sudhakar on the Agentforce IT Service launch · Salesforce+</div>
+        </div>
+      </a>
+      <a class="sil-video-link" href="https://www.salesforce.com/plus/experience/dreamforce_2025/series/service_at_dreamforce_2025/episode/episode-s1e5" target="_blank">
+        <div class="sil-video-link-ico">💬</div>
+        <div>
+          <div class="sil-video-link-title">What Customers Really Think — Live Panel</div>
+          <div class="sil-video-link-sub">EPB: "8 hours → minutes" for IT requests · 8 min · Salesforce+</div>
+        </div>
+      </a>
+      <a class="sil-video-link" href="https://www.salesforce.com/service/demos/agentforce-it-service-demo/?d=pb" target="_blank">
+        <div class="sil-video-link-ico">🖥️</div>
+        <div>
+          <div class="sil-video-link-title">Interactive Product Demo</div>
+          <div class="sil-video-link-sub">Guided walkthrough on Salesforce.com — no login required</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- CUSTOMER PANEL -->
+  <div class="sil-panel" id="sil-customers">
+
+    <div class="sil-stat-strip">
+      <div class="sil-stat-item">
+        <div class="sil-stat-num">8 hrs → min</div>
+        <div class="sil-stat-lbl">IT request routing time at EPB with Agentforce</div>
+      </div>
+      <div class="sil-stat-item">
+        <div class="sil-stat-num">90%</div>
+        <div class="sil-stat-lbl">Chats resolved by AI at Heathrow — no live transfer</div>
+      </div>
+      <div class="sil-stat-item">
+        <div class="sil-stat-num">50%</div>
+        <div class="sil-stat-lbl">Chat requests auto-resolved at Engine (travel tech)</div>
+      </div>
+    </div>
+
+    <div class="sil-customer-grid">
+
+      <div class="sil-customer-card">
+        <div class="sil-customer-logo-area">
+          <img src="https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2025/11/unesco.jpg" alt="UNESCO"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="sil-customer-name">UNESCO</div>
+        <div class="sil-customer-industry">International Organization</div>
+        <div class="sil-customer-quote">"Combining the power of humans and agentic AI to enhance the experience of both our IT teams and employees."</div>
+        <div class="sil-customer-stat">— Omar Baig, CITO</div>
+      </div>
+
+      <div class="sil-customer-card">
+        <div class="sil-customer-logo-area">
+          <div style="font-size:22px; font-weight:900; color:#005A9C; letter-spacing:-1px;">EPB</div>
+        </div>
+        <div class="sil-customer-name">EPB</div>
+        <div class="sil-customer-industry">Energy / Utilities</div>
+        <div class="sil-customer-quote">"With Agentforce, we're going to get that down to minutes. It used to take eight hours just to route a simple request."</div>
+        <div class="sil-customer-stat">8 hrs → minutes · IT routing time</div>
+      </div>
+
+      <div class="sil-customer-card">
+        <div class="sil-customer-logo-area">
+          <div style="font-size:13px; font-weight:900; color:#1A1A1A; letter-spacing:-0.5px;">OSPELT<br><span style="font-weight:400;font-size:10px;color:#666;">GROUP</span></div>
+        </div>
+        <div class="sil-customer-name">Ospelt Group</div>
+        <div class="sil-customer-industry">Food Manufacturing</div>
+        <div class="sil-customer-quote">"Automating routine tasks with workflows and using Agentforce for faster, more reliable IT solutions across our locations."</div>
+        <div class="sil-customer-stat">— Reto Sigenthaler, CIO</div>
+      </div>
+
+      <div class="sil-customer-card">
+        <div class="sil-customer-logo-area">
+          <div style="font-size:16px; font-weight:900; color:#222; letter-spacing:-0.5px; font-style:italic;">re<span style="color:#E84040;">M</span>arkable</div>
+        </div>
+        <div class="sil-customer-name">reMarkable</div>
+        <div class="sil-customer-industry">High Tech / Hardware</div>
+        <div class="sil-customer-quote">"We've reduced the noise around the IT support desks. With the agent in place, fewer people walk up directly to IT staff."</div>
+        <div class="sil-customer-stat">Deflecting walk-up IT requests</div>
+      </div>
+
+      <div class="sil-customer-card">
+        <div class="sil-customer-logo-area">
+          <div style="font-size:14px; font-weight:900; color:#4B286D; letter-spacing:2px; text-transform:uppercase;">Heathrow</div>
+        </div>
+        <div class="sil-customer-name">Heathrow Airport</div>
+        <div class="sil-customer-industry">Aviation / Transportation</div>
+        <div class="sil-customer-quote">"AI agent 'Hallie' resolves 90% of passenger chats without live transfer — 40% improvement in digital contact efficiency."</div>
+        <div class="sil-customer-stat">90% AI resolution rate</div>
+      </div>
+
+      <div class="sil-customer-card">
+        <div class="sil-customer-logo-area">
+          <img src="https://wp.sfdcdigital.com/en-us/wp-content/uploads/sites/4/2026/06/engine-logo-card.webp" alt="Engine"
+               onerror="this.style.display='none'">
+        </div>
+        <div class="sil-customer-name">Engine</div>
+        <div class="sil-customer-industry">Travel Technology</div>
+        <div class="sil-customer-quote">"Agentforce resolves 50% of chat requests autonomously. Our internal Slackbot saves employees 30 minutes every day."</div>
+        <div class="sil-customer-stat">30 min/day saved per employee</div>
+      </div>
+
+      <div class="sil-customer-card">
+        <div class="sil-customer-logo-area">
+          <div style="font-size:14px; font-weight:700; color:#E1000F; letter-spacing:-0.5px;">FUJITSU</div>
+        </div>
+        <div class="sil-customer-name">Fujitsu</div>
+        <div class="sil-customer-industry">IT Services / Technology</div>
+        <div class="sil-customer-quote">"Using Agentforce for security threat detection, network insights, and employee helpdesk support — all from one platform."</div>
+        <div class="sil-customer-stat">Security + Helpdesk unified</div>
+      </div>
+
+      <div class="sil-customer-card" style="background:linear-gradient(135deg,#f0f6ff,#e8f4f8);border-color:#c7dff7;">
+        <div class="sil-customer-logo-area">
+          <div style="font-size:24px;">🚜</div>
+        </div>
+        <div class="sil-customer-name">Your Dealership</div>
+        <div class="sil-customer-industry">Agriculture / Equipment</div>
+        <div class="sil-customer-quote">"Be the next dealer to transform IT from a cost center into a competitive advantage — with AI that pays for itself."</div>
+        <div class="sil-customer-stat" style="background:var(--brand-primary);color:var(--brand-secondary);">Dealer offer: $3/emp/mo</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-body">
+      <div class="cta-eyebrow">Ready to see it live?</div>
+      <div class="cta-title" id="cta-title">See Agentforce IT Service in action for your dealership.</div>
+      <div class="cta-sub">30-minute live demo tailored to your dealership size and current tool. See exactly what it costs, what it deflects, and what your IT team gets back.</div>
+    </div>
+    <div class="cta-btns">
+      <button class="cta-btn-primary" onclick="scheduleDemo()">📅 Schedule a Demo</button>
+      <button class="cta-btn-secondary" onclick="printROI()">📄 Download ROI Summary</button>
+    </div>
+  </div>
+
+</div><!-- end main -->
+
+<!-- DEMO REQUEST MODAL -->
+<div class="modal-overlay" id="demo-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-hdr">
+      <div>
+        <div class="modal-hdr-title">📅 Request a Demo</div>
+        <div class="modal-hdr-sub">Your info + ROI summary goes directly to your Salesforce AE</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-roi-preview" id="modal-roi-preview">Complete the ROI calculator above first to include your numbers.</div>
+      <div class="modal-two-col">
+        <div class="modal-field">
+          <div class="modal-label">First Name</div>
+          <input class="modal-input" id="m-fname" type="text" placeholder="Jane">
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Last Name</div>
+          <input class="modal-input" id="m-lname" type="text" placeholder="Smith">
+        </div>
+      </div>
+      <div class="modal-field">
+        <div class="modal-label">Email</div>
+        <input class="modal-input" id="m-email" type="email" placeholder="jane@dealership.com">
+      </div>
+      <div class="modal-two-col">
+        <div class="modal-field">
+          <div class="modal-label">Phone</div>
+          <input class="modal-input" id="m-phone" type="tel" placeholder="(555) 000-0000">
+        </div>
+        <div class="modal-field">
+          <div class="modal-label">Dealership Name</div>
+          <input class="modal-input" id="m-company" type="text" placeholder="Acme Ag Equipment">
+        </div>
+      </div>
+      <div class="modal-field">
+        <div class="modal-label">Anything you'd like us to know?</div>
+        <input class="modal-input" id="m-notes" type="text" placeholder="e.g. We're evaluating by end of Q3">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="modal-cancel" onclick="closeModal()">Cancel</button>
+      <button class="modal-submit" onclick="submitDemo()">Send to Salesforce AE →</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <span>Salesforce Agentforce IT Service · Dealer Outreach Program</span>
+  <span>Pricing and ROI estimates are directional. Contact your Salesforce AE for a custom quote.</span>
+</div>
+
+<script>
+// ══════════════════════════════════════════
+//  BRAND / DEALER CONFIG
+// ══════════════════════════════════════════
+function updateDealer(name) {
+  const safe = name.trim() || 'Your Dealership';
+  document.getElementById('hero-dealer-name').textContent = safe;
+  document.getElementById('dealer-badge').textContent = safe + ' · IT Modernization';
+  document.getElementById('cta-title').textContent = 'See Agentforce IT Service in action for ' + safe + '.';
+  document.getElementById('roi-sum-title').textContent = 'ROI Summary — ' + safe;
+  // Sync employee field
+  const cfgEmp = document.getElementById('cfg-employees').value;
+  if (cfgEmp) document.getElementById('roi-emp').value = cfgEmp;
+  recalcROI();
+}
+
+function syncAndRecalc(src, dest) {
+  document.getElementById(dest).value = document.getElementById(src).value;
+  recalcROI();
+}
+
+// ══════════════════════════════════════════
+//  COMPETITOR MESSAGING
+// ══════════════════════════════════════════
+const COMPETITORS = {
+  servicenow: {
+    ico: '⚙️',
+    eyebrow: 'Comparing vs. ServiceNow',
+    title: 'ServiceNow pricing is built for the Fortune 500 — and you\'re paying for it.',
+    desc: 'ServiceNow doesn\'t publish pricing, but independent research and customer reviews consistently cite licensing and upgrade costs as the #1 pain point — particularly for mid-market organizations. Version upgrades require IT resources, custom modules, and often a dedicated ServiceNow admin just to maintain the platform. Agentforce IT Service is deployed in weeks, maintained by Salesforce (not you), and priced transparently. Same enterprise-grade ITIL processes at a fraction of the total cost of ownership.',
+    pricingContext: 'ServiceNow: custom enterprise pricing; opaque licensing + upgrade costs. Salesforce ITSM: $75/IT fulfiller/mo + $5/employee/mo — fully transparent.',
+    good: ['Transparent, predictable pricing', 'No upgrade costs — Salesforce manages it', 'No dedicated admin team required', 'Deployed in weeks, not quarters'],
+    bad: ['ServiceNow: opaque pricing, re-negotiate each renewal', 'ServiceNow: upgrades require IT resources + downtime', 'ServiceNow: dedicated admin needed to maintain', 'ServiceNow: heavy implementation services cost'],
+    vsRows: [
+      ['Pricing Model', 'Custom enterprise, re-negotiated annually', 'Transparent per-seat — predictable budget'],
+      ['Upgrade Cost', 'Significant — requires IT resources & consulting', 'Zero — Salesforce handles all upgrades'],
+      ['Implementation Time', '6–18 months typical', 'Weeks with Salesforce Go Config'],
+      ['Admin Overhead', 'Requires dedicated ServiceNow admin', 'Managed SaaS — minimal overhead'],
+      ['AI Capabilities', 'Bolt-on via Moveworks acquisition', 'Native Agentforce — built-in from day one'],
+      ['Case Deflection', 'Limited at mid-market tier', '40%+ cases auto-resolved via AI agents'],
+      ['Employee Experience', 'Separate portal, separate login', 'Native in Slack/Teams — no new portal'],
+      ['Asset Management', 'Available, complex setup', 'CMDB + Discovery included, 200+ CI classes'],
+    ]
+  },
+  jira: {
+    ico: '📋',
+    eyebrow: 'Comparing vs. Jira Service Management',
+    title: 'Jira is $20–40/agent/month — and it was built for developers, not IT leaders.',
+    desc: 'Atlassian Jira Service Management starts at $20/agent/month (Standard) and $40/agent/month (Premium). At those prices you get a dev-centric ticket system — but limited CMDB, no AI agents out of the box, and ITSM depth that requires premium add-ons to match what Agentforce includes by default. Salesforce IT Service gives your team proper ITIL lifecycle management, 50+ AI agents for case deflection, and full asset visibility — without asking your IT staff to think like software developers.',
+    pricingContext: 'Jira Standard: $20/agent/mo · Jira Premium: $40/agent/mo · AI (Rovo) and advanced CMDB: additional cost. Salesforce: $75/IT fulfiller/mo, everything included.',
+    good: ['ITIL-complete OOTB — no add-ons', '50+ AI agents for case deflection', 'CMDB + agentless discovery included', 'IT-first UI, not dev-centric'],
+    bad: ['Jira $20–40/agent + add-ons for full ITSM', 'Jira: AI (Rovo) is a separate subscription', 'Jira: CMDB depth requires configuration', 'Jira: advanced reporting locked to higher tiers'],
+    vsRows: [
+      ['Base Price', '$20–40/agent/mo + add-ons for AI, CMDB', '$75/IT fulfiller/mo — complete platform'],
+      ['AI / Case Deflection', 'Rovo AI = separate subscription', '50+ agents included — deflect 40%+ of cases'],
+      ['CMDB', 'Basic; limited CI classes', '200+ CI classes, agentless discovery'],
+      ['ITIL Compliance', 'Partial; change/problem mgmt limited', 'Full ITIL lifecycle — certified'],
+      ['Audience', 'Dev-team first, IT second', 'Built for IT operations leaders'],
+      ['Reporting', 'Basic OOTB; premium for advanced', 'Live dashboards + Tableau built-in'],
+      ['Employee Self-Service', 'Portal-based', 'Slack/Teams AI agents — conversational'],
+      ['Upgrade Path', 'Ecosystem lock-in (Confluence, etc.)', 'Standalone or extend to CRM/Service Cloud'],
+    ]
+  },
+  freshservice: {
+    ico: '🌿',
+    eyebrow: 'Comparing vs. Freshservice',
+    title: 'Freshservice is $49–99/agent/month — and AI is only unlocked at Enterprise.',
+    desc: 'Freshservice publishes clear pricing: $49/agent/month (Pro) or $99/agent/month (Enterprise) for full ITSM. Freddy AI — their AI assistant for case deflection and smart routing — is only included at the Enterprise tier (custom pricing). Salesforce Agentforce IT Service includes native AI agents at every tier, connects directly to your existing tech stack via 240+ MuleSoft connectors, and scales across multiple dealer locations without the multi-entity constraints Freshservice customers routinely hit.',
+    pricingContext: 'Freshservice Pro: $49/agent/mo · Enterprise (AI included): custom pricing. Salesforce: $75/IT fulfiller/mo with AI agents built in.',
+    good: ['AI case deflection included — no upgrade needed', 'Scales across multi-location dealer networks', '240+ connectors to your existing stack', 'Unified with CRM + Service Cloud if needed'],
+    bad: ['Freshservice: AI locked to Enterprise tier', 'Freshservice: $49–99/agent before AI costs', 'Freshservice: limited multi-entity support', 'Freshservice: no native CRM connection'],
+    vsRows: [
+      ['Price w/ AI', 'AI only at Enterprise (custom)', '$75/IT fulfiller/mo — AI included'],
+      ['Case Deflection', 'Freddy AI: Enterprise-only', 'Agentforce: 40%+ deflection at all tiers'],
+      ['Multi-location', 'Limited multi-entity support', 'Built for multi-site dealer networks'],
+      ['CRM Integration', 'Separate platform, no native link', 'Native Salesforce — unified customer + IT data'],
+      ['Asset Management', 'First 100 assets free; then charged', 'CMDB included — unlimited assets'],
+      ['Connectors', '~50 native integrations', '240+ MuleSoft connectors'],
+      ['Vendor Stability', 'Mid-market SaaS company', 'Salesforce — #1 CRM, $35B+ revenue'],
+      ['Implementation', 'Weeks (SMB-focused)', 'Weeks — with Salesforce Go Config support'],
+    ]
+  },
+  cherwell: {
+    ico: '⚠️',
+    eyebrow: 'Cherwell / Ivanti is End-of-Life',
+    title: 'Cherwell is EOL — every dollar you spend on it is a sunk cost.',
+    desc: 'Ivanti acquired Cherwell and subsequently end-of-lifed the product. No new features. Diminishing security patches. A migration that is no longer optional — just a matter of when. This is the ideal window to move to Agentforce IT Service: preserve your ITIL processes and data, eliminate the legacy maintenance cost from your IT budget, and add AI-powered case deflection that Cherwell never had. Salesforce has structured migration playbooks for Cherwell customers — designed to minimize disruption.',
+    pricingContext: 'Cherwell: custom legacy pricing + ongoing maintenance fees on an EOL product. Every renewal is money spent on something Ivanti is no longer investing in.',
+    good: ['Structured EOL migration playbook', 'Preserve all ITIL processes + data', 'Eliminate EOL maintenance from budget', 'Add AI case deflection from day one'],
+    bad: ['Cherwell: EOL — no new features or roadmap', 'Cherwell: security patches diminishing', 'Cherwell: maintenance cost with zero ROI', 'Cherwell: zero AI or modern automation'],
+    vsRows: [
+      ['Product Status', 'End-of-Life — Ivanti discontinued', 'Active — Salesforce investing heavily in AI'],
+      ['Security', 'Diminishing patch coverage', 'SOC2, ISO 27001, continuous updates'],
+      ['AI / Automation', 'None — never built in', '50+ AI agents for case deflection'],
+      ['Subscription Value', 'Paying for a shrinking product', 'Transparent pricing, growing capabilities'],
+      ['Migration Risk', 'Delays increase security exposure', 'Migration playbooks — structured, low-risk'],
+      ['CMDB', 'Basic, legacy schema', '200+ CI classes, agentless discovery'],
+      ['Employee Experience', 'Portal-only, dated UI', 'Slack/Teams AI agents — conversational'],
+      ['Long-term TCO', 'Forced migration eventually — pay twice', 'Migrate now — one cost, modern platform'],
+    ]
+  },
+  remedy: {
+    ico: '⚠️',
+    eyebrow: 'Comparing vs. BMC Remedy / Helix',
+    title: 'Remedy requires a specialist team just to keep the lights on.',
+    desc: 'BMC Remedy and Helix are enterprise-grade platforms designed before cloud, before AI, and before Slack existed. They are expensive to customize, require specialized BMC-certified consultants for upgrades and changes, and carry significant total cost of ownership well beyond the license fee. Agentforce IT Service delivers the same ITIL rigor — incident, problem, change, release, CMDB — with a modern AI-first architecture that your existing IT team can operate without a specialized consultant on speed dial.',
+    pricingContext: 'BMC Remedy/Helix: enterprise custom pricing + significant professional services for implementation, upgrades, and customization. Not built for mid-market self-service.',
+    good: ['No specialist consultants required', 'Modern SaaS — Salesforce manages the platform', 'Predictive AI included — not a $300K add-on', 'Full ITIL without the complexity tax'],
+    bad: ['Remedy: specialist consultants for every change', 'Remedy: expensive upgrades + migration projects', 'Remedy: on-prem heritage, cloud add-on feels bolted', 'Remedy: no conversational AI or self-service'],
+    vsRows: [
+      ['Implementation', 'Months + BMC consulting required', 'Weeks — Salesforce Go Config included'],
+      ['Ongoing Admin', 'BMC-certified specialists needed', 'IT team can self-administer'],
+      ['AI / Case Deflection', 'Limited, not native', '50+ agents — 40%+ auto-resolution'],
+      ['Upgrade Process', 'Formal projects, costly, risk of regression', 'Continuous SaaS — zero upgrade projects'],
+      ['Total Cost of Ownership', 'License + services + specialist overhead', 'Predictable subscription — all-in'],
+      ['Employee Experience', 'Complex portal, steep learning curve', 'Conversational — Slack/Teams native'],
+      ['CMDB', 'Deep but complex to configure', '200+ CI classes, discovery automated'],
+      ['Mid-Market Fit', 'Enterprise-focused, complex for <1,000 emp', 'Scales from 50 to 5,000+ employees'],
+    ]
+  },
+  remedyforce: {
+    ico: '🔄',
+    eyebrow: 'Upgrading from Remedyforce',
+    title: 'You\'re already on Salesforce — this is the natural next step.',
+    desc: 'Remedyforce was built on the Salesforce platform, so you already know the architecture. Agentforce IT Service is its modern successor — purpose-built ITSM with 50+ AI agents for case deflection, full CMDB with agentless discovery, and complete ITIL compliance, all within your existing Salesforce org. No data migration, no new contracts, no retraining on a new platform. The pricing delta between Remedyforce and Agentforce IT Service is justified by AI case deflection alone in most BVAs.',
+    pricingContext: 'Remedyforce: existing Salesforce subscription. Agentforce IT Service adds IT Service Desk EE at $75/fulfiller/mo — offset by case deflection savings from day one.',
+    good: ['Same Salesforce org — no migration', 'AI case deflection added immediately', 'Full CMDB (Remedyforce lacks this)', 'One upgrade conversation, not a vendor switch'],
+    bad: ['Remedyforce: no AI agents or deflection', 'Remedyforce: no native CMDB', 'Remedyforce: limited ITIL depth', 'Remedyforce: no longer on active investment roadmap'],
+    vsRows: [
+      ['AI Case Deflection', 'None', '50+ agents — 40%+ auto-resolution'],
+      ['CMDB', 'Not included', '200+ CI classes + agentless discovery'],
+      ['ITIL Depth', 'Incident + Request only', 'Full — Change, Problem, Release included'],
+      ['Platform', 'Salesforce (existing org)', 'Same Salesforce org — no migration'],
+      ['Employee Self-Service', 'Portal-based', 'Slack/Teams AI agents — conversational'],
+      ['Investment Roadmap', 'Legacy product, limited investment', 'Core Salesforce platform — AI roadmap active'],
+      ['Upgrade Effort', 'Requires re-implementation', 'Configuration upgrade, same org'],
+      ['ROI Timeline', 'Maintenance mode', 'Case deflection offsets cost within months'],
+    ]
+  },
+  email: {
+    ico: '📧',
+    eyebrow: 'Moving from Email / Ad-Hoc IT',
+    title: 'Email-based IT isn\'t free — it\'s costing you in ways you can\'t see.',
+    desc: 'When IT runs on email and spreadsheets, there\'s no license cost — but the labor cost is massive. Every request creates a manual thread. Nothing is tracked or measured. SLAs don\'t exist. Your IT team spends the majority of their time responding to messages instead of solving problems. Agentforce IT Service replaces all of that with a full service desk, AI agents that resolve the most common requests automatically, and dashboards that show you exactly where your IT time goes. Implementation is measured in weeks.',
+    pricingContext: 'Email/spreadsheets: $0 license, but typically 30–50% higher IT labor cost per resolved issue than AI-powered platforms. Agentforce: $5/employee/mo starts paying back in week one.',
+    good: ['Full ticketing + SLA tracking from day 1', 'AI deflects 40%+ of cases — no human needed', 'Visibility: dashboards, trends, SLA reporting', 'Implementation in weeks — no complex migration'],
+    bad: ['Email: zero ticket tracking or SLA visibility', 'Email: every request manual — no automation', 'Email: IT buried in inbox, no strategic time', 'Email: no asset tracking, no CMDB'],
+    vsRows: [
+      ['Ticket Tracking', 'None — email threads', 'Full lifecycle — open to close, SLA tracked'],
+      ['Case Deflection', 'Zero — every issue hits IT', '40%+ resolved by AI agents automatically'],
+      ['SLA Visibility', 'None', 'Live dashboards — SLA, backlog, trends'],
+      ['Asset Management', 'Spreadsheet or none', 'CMDB — every device, every location'],
+      ['Employee Experience', 'Email IT, wait hours or days', 'Ask Slack/Teams — resolved in seconds'],
+      ['IT Staff Time', 'Mostly reactive, inbox-driven', 'Strategic work — AI handles Level 1'],
+      ['Onboarding', 'Manual, IT-intensive', 'AI agent provisions day-1 access automatically'],
+      ['Implementation', 'N/A', 'Weeks — structured, low risk'],
+    ]
+  },
+  none: {
+    ico: '🌱',
+    eyebrow: 'Building ITSM from the Ground Up',
+    title: 'Starting fresh means you can skip 20 years of legacy debt.',
+    desc: 'Dealerships without a formal ITSM platform typically carry 30–50% higher IT labor cost per resolved issue — because everything is manual, nothing is measured, and tribal knowledge replaces systems of record. Starting with Agentforce IT Service means you go AI-first from day one: conversational agents that resolve common requests automatically, a CMDB that builds itself through automated discovery, and ITIL processes that grow with your organization without requiring a full IT overhaul later.',
+    pricingContext: 'Starting price: $5/employee/mo for AI agents in Slack/Teams. Add IT Service Desk EE at $75/IT fulfiller/mo for full ITSM. Both pay back in IT labor savings within months.',
+    good: ['AI-first from day one — no legacy to unwind', 'ITIL best practices built in — no consultant needed', 'CMDB discovery automated — no manual audit', 'Start at $5/emp/mo — scale as you grow'],
+    bad: ['Current state: no ticket tracking', 'Current state: manual everything, high per-ticket cost', 'Current state: no SLA visibility or trend data', 'Current state: no asset record or CMDB'],
+    vsRows: [
+      ['Starting Cost', '$0 license, high hidden labor cost', '$5/emp/mo + $75/IT fulfiller/mo'],
+      ['Case Deflection', 'Zero — every request is manual', '40%+ auto-resolved from week one'],
+      ['Ticket Visibility', 'None', 'Full tracking — open, backlog, SLA, trends'],
+      ['Asset Management', 'Spreadsheet or tribal knowledge', 'Automated CMDB — self-building via discovery'],
+      ['Employee Experience', 'Call or email IT and wait', 'Slack/Teams AI — resolved in under 60 seconds'],
+      ['ITIL Compliance', 'None', 'Full ITIL lifecycle — certified'],
+      ['Scalability', 'Breaks as headcount grows', 'Scales from 50 to 5,000+ without re-platforming'],
+      ['Implementation', 'N/A', 'Weeks — structured playbook, low risk'],
+    ]
+  },
+  other: {
+    ico: '🔄',
+    eyebrow: 'Evaluating a Move to Agentforce',
+    title: 'Whatever you\'re on today, Agentforce IT Service is built to replace it.',
+    desc: 'Agentforce IT Service is designed to replace any ITSM platform — or co-exist while you migrate at your own pace. 50+ AI agents out of the box resolve the most common IT requests automatically, so your team sees case deflection benefits before the full migration is even complete. Full ITIL, CMDB with agentless discovery, and 240+ MuleSoft connectors mean it works with your existing environment from day one. Start with AI Agents for Employees at $5/user/month alongside your current tool, and expand from there.',
+    pricingContext: 'Start at $5/employee/mo for AI agents. Add full ITSM at $75/IT fulfiller/mo. Co-exist with your current platform during migration — no forced cutover.',
+    good: ['Co-exist with current tool during migration', '50+ AI agents delivering deflection immediately', '240+ connectors — works with your existing stack', '$5/emp/mo entry — expand at your pace'],
+    bad: [],
+    vsRows: [
+      ['Migration Approach', 'Forced cutover typical', 'Co-exist model — migrate at your pace'],
+      ['AI Case Deflection', 'Varies by platform', '40%+ auto-resolved via 50+ agents'],
+      ['Connectors', 'Varies', '240+ MuleSoft connectors — works with your stack'],
+      ['Pricing Entry Point', 'Varies', '$5/emp/mo — add full ITSM when ready'],
+      ['ITIL Compliance', 'Varies', 'Full lifecycle — certified'],
+      ['CMDB', 'Varies', '200+ CI classes + agentless discovery'],
+      ['Employee Experience', 'Portal-based typical', 'Slack/Teams conversational AI'],
+      ['Vendor Backing', 'Varies', 'Salesforce — #1 CRM, $35B+ annual revenue'],
+    ]
+  }
+};
+
+// ══════════════════════════════════════════
+//  COMPETITIVE PRICING DATA (for ROI section)
+// ══════════════════════════════════════════
+const COMP_PRICING = {
+  servicenow: {
+    title: 'Estimated ServiceNow cost vs. Salesforce — for your team size',
+    model: 'Custom enterprise pricing — not published. Typical mid-market deals',
+    items: [
+      { lbl: 'ServiceNow Licensing', calcVal: (emp, it) => null, staticVal: 'Custom quote', sub: 'Not published; requires direct negotiation each renewal' },
+      { lbl: 'Typical Upgrade Projects', calcVal: () => null, staticVal: '$50K–$200K+', sub: 'Platform upgrades require IT resources + consulting engagement' },
+      { lbl: 'Dedicated Admin Overhead', calcVal: (emp, it) => it * 85000, sub: 'Estimated FTE cost to maintain ServiceNow platform (~1 dedicated admin)' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '$75/IT fulfiller/mo + $3/emp/mo (dealer) vs. $15 list — full platform, no upgrade fees' },
+    ],
+    note: 'ServiceNow does not publish pricing. Independent research and G2 reviews consistently cite licensing + upgrade complexity as the top pain point for mid-market customers. Salesforce cost is fully transparent and includes all upgrades.'
+  },
+  jira: {
+    title: 'Jira Service Management cost vs. Salesforce — for your team size',
+    model: 'Published Atlassian pricing used',
+    items: [
+      { lbl: 'Jira Premium (est.)', calcVal: (emp, it) => it * 40 * 12, sub: '$40/agent/mo (Premium tier) — required for advanced ITSM features' },
+      { lbl: 'Rovo AI Add-on (est.)', calcVal: (emp, it) => it * 25 * 12, sub: '~$25/user/mo for Atlassian AI (Rovo) — separate subscription, not included' },
+      { lbl: 'Jira Total w/ AI (est.)', calcVal: (emp, it) => (it * 40 * 12) + (it * 25 * 12), sub: 'Combined agent + AI cost — before CMDB add-ons' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '$75/IT fulfiller/mo + $3/emp/mo dealer ($15 list) — AI agents, CMDB, ITIL all included' },
+    ],
+    note: 'Jira Standard: $20/agent/mo · Jira Premium: $40/agent/mo (published by Atlassian). Rovo AI is a separate subscription. Full CMDB and advanced reporting require additional configuration or add-ons. Salesforce ITSM includes all of this in one subscription.'
+  },
+  freshservice: {
+    title: 'Freshservice cost vs. Salesforce — for your team size',
+    model: 'Published Freshworks pricing used',
+    items: [
+      { lbl: 'Freshservice Pro (est.)', calcVal: (emp, it) => it * 99 * 12, sub: '$99/agent/mo (Pro) — required for full ITIL; AI locked to Enterprise' },
+      { lbl: 'AI Upgrade (Enterprise)', calcVal: () => null, staticVal: 'Custom pricing', sub: 'Freddy AI only available at Enterprise tier — requires a new quote' },
+      { lbl: 'Freshservice Pro Total', calcVal: (emp, it) => it * 99 * 12, sub: 'Pro without AI — 100 assets free, then additional asset charges' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '\$75/IT fulfiller/mo + \$3/emp/mo dealer (\$15 list) — AI agents + CMDB included at all tiers' },
+    ],
+    note: 'Freshservice publishes pricing: Starter $19, Growth $49, Pro $99 per agent/month. Freddy AI (case deflection, smart routing) is only included at Enterprise — custom pricing. Salesforce Agentforce case deflection is included at every tier.'
+  },
+  cherwell: {
+    title: 'Cherwell / Ivanti (EOL) vs. Salesforce — the cost of staying',
+    model: 'Cherwell pricing is custom; EOL maintenance costs estimated',
+    items: [
+      { lbl: 'Cherwell Maintenance Fee', calcVal: () => null, staticVal: '18–22% of license/yr', sub: 'Typical legacy software maintenance on an EOL product with no new features' },
+      { lbl: 'Security Risk Premium', calcVal: () => null, staticVal: 'Unquantified', sub: 'Diminishing security patches increase exposure — compliance and audit risk' },
+      { lbl: 'Forced Migration Cost', calcVal: () => null, staticVal: '$75K–$300K+', sub: 'Migration will be required — the longer you wait, the higher the cost' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '\$75/IT fulfiller/mo + \$3/emp/mo dealer (\$15 list) — migrate now, avoid the forced timeline' },
+    ],
+    note: 'Ivanti Cherwell is end-of-life. Every dollar spent on maintenance today returns zero new capability. Migrating to Salesforce now resets your TCO and adds AI case deflection from day one.'
+  },
+  remedy: {
+    title: 'BMC Remedy / Helix vs. Salesforce — total cost of ownership',
+    model: 'BMC pricing is custom enterprise; professional services estimates from industry data',
+    items: [
+      { lbl: 'BMC License', calcVal: () => null, staticVal: 'Custom — enterprise-only', sub: 'No published pricing; typically bundled with professional services' },
+      { lbl: 'Implementation Services', calcVal: () => null, staticVal: '$200K–$1M+', sub: 'BMC-certified consultants required for implementation and upgrades' },
+      { lbl: 'Specialist Admin (annual)', calcVal: (emp, it) => it * 110000, sub: 'Estimated annual cost of BMC-certified admin to maintain the platform' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '\$75/IT fulfiller/mo + \$3/emp/mo dealer (\$15 list) — your team self-administers, no specialists' },
+    ],
+    note: 'BMC Remedy/Helix is designed for large enterprises with dedicated BMC specialists on staff. Mid-market customers consistently cite specialist dependency as a hidden cost driver. Salesforce ITSM is designed to be self-administered by your existing IT team.'
+  },
+  remedyforce: {
+    title: 'Upgrading Remedyforce to Agentforce IT Service — same org, lower friction',
+    model: 'Same Salesforce org — incremental cost only',
+    items: [
+      { lbl: 'Your Current SF Spend', calcVal: () => null, staticVal: 'Existing contract', sub: 'Remedyforce runs in your current Salesforce org — no new vendor' },
+      { lbl: 'Agentforce IT Service Add', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '\$75/IT fulfiller/mo + \$3/emp/mo dealer (\$15 list) added to your existing org' },
+      { lbl: 'Case Deflection Value', calcVal: () => null, staticVal: 'See calculator →', sub: 'AI agents begin deflecting cases immediately — value offsets cost in months' },
+      { lbl: 'Migration Effort', calcVal: () => null, staticVal: 'Configuration only', sub: 'No data migration — same org, same data, configuration upgrade' },
+    ],
+    note: 'Remedyforce customers are the easiest upgrade path. Same Salesforce org means no migration project — just enabling new capabilities. The incremental cost is offset by case deflection value within the first year in most BVA scenarios.'
+  },
+  email: {
+    title: 'Hidden cost of email-based IT vs. Salesforce subscription',
+    model: 'Labor cost modeled from your inputs below',
+    items: [
+      { lbl: 'Current IT Tool Cost', calcVal: () => 0, staticVal: '$0/yr', sub: 'No license fee — but 100% of tickets are manual, 0% deflected' },
+      { lbl: 'Est. Annual IT Labor (manual)', calcVal: (emp, it, rate, tpm, hrs) => emp * tpm * hrs * rate * 12, sub: 'All tickets resolved manually — full labor cost, no automation' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '\$75/IT fulfiller/mo + \$3/emp/mo dealer (\$15 list) — deflects 40% automatically' },
+      { lbl: 'Net Cost After Deflection', calcVal: (emp, it, rate, tpm, hrs) => {
+          const sfCost = (it * 75 * 12) + (emp * 5 * 12);
+          const deflectionSavings = emp * tpm * 0.4 * hrs * rate * 12;
+          return sfCost - deflectionSavings;
+        }, sub: 'Salesforce cost minus value returned by 40% case deflection' },
+    ],
+    note: 'Email-based IT has no license cost but the highest labor cost per resolved ticket. Salesforce ITSM deflects 40% of cases automatically — in most scenarios the deflection savings offset the full subscription cost within the first year.'
+  },
+  none: {
+    title: 'Starting fresh — what ITSM costs vs. what doing nothing costs',
+    model: 'Labor cost modeled from your inputs below',
+    items: [
+      { lbl: 'Current ITSM Cost', calcVal: () => 0, staticVal: '$0/yr', sub: 'No tool today — but every request is manual and untracked' },
+      { lbl: 'Est. Annual IT Labor (manual)', calcVal: (emp, it, rate, tpm, hrs) => emp * tpm * hrs * rate * 12, sub: 'Full labor cost — no automation, no deflection, no tracking' },
+      { lbl: 'Salesforce Entry Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '$5/emp/mo (AI agents) + $75/IT fulfiller/mo (full ITSM)' },
+      { lbl: 'Net Cost After Deflection', calcVal: (emp, it, rate, tpm, hrs) => {
+          const sfCost = (it * 75 * 12) + (emp * 5 * 12);
+          const deflectionSavings = emp * tpm * 0.4 * hrs * rate * 12;
+          return sfCost - deflectionSavings;
+        }, sub: 'Salesforce subscription minus 40% deflection savings' },
+    ],
+    note: 'No ITSM today means 100% of IT requests are manual. Salesforce ITSM at $5/employee/month + $75/fulfiller/month typically pays for itself within the first year through AI case deflection alone — before accounting for SLA visibility, asset management, or compliance value.'
+  },
+  other: {
+    title: 'Salesforce IT Service subscription — fully transparent',
+    model: 'Calculated from your inputs below',
+    items: [
+      { lbl: 'AI Agents for Employees', calcVal: (emp) => emp * 5 * 12, sub: '$5/employee/mo — Slack/Teams AI agents, 50+ OOTB, no new portal' },
+      { lbl: 'IT Service Desk EE', calcVal: (emp, it) => it * 75 * 12, sub: '$75/IT fulfiller/mo — full ITIL, CMDB, AI for IT team' },
+      { lbl: 'Total Annual Subscription', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: 'All-in — no upgrade fees, no add-ons for AI or CMDB' },
+      { lbl: 'Case Deflection Value', calcVal: () => null, staticVal: 'See calculator →', sub: '40% of cases auto-resolved — value returned typically exceeds subscription' },
+    ],
+    note: 'Salesforce publishes all ITSM pricing transparently. No renegotiation, no upgrade projects, no specialist admin required. AI agents and CMDB are included — not add-ons.'
+  }
+};
+
+function renderCompRoiCtx(val) {
+  const ctx = document.getElementById('comp-roi-ctx');
+  if (!val || !COMP_PRICING[val]) { ctx.classList.remove('visible'); return; }
+
+  const emp  = parseFloat(document.getElementById('roi-emp').value)     || 0;
+  const it   = parseFloat(document.getElementById('roi-it').value)      || 0;
+  const rate = parseFloat(document.getElementById('roi-rate').value)    || 0;
+  const tpm  = parseFloat(document.getElementById('roi-tickets').value) || 0;
+  const hrs  = parseFloat(document.getElementById('roi-resolve').value) || 0;
+
+  const cd = COMP_PRICING[val];
+  document.getElementById('comp-roi-ctx-title').textContent = cd.title;
+
+  const grid = document.getElementById('comp-roi-ctx-grid');
+  grid.innerHTML = cd.items.map(item => {
+    let valStr = item.staticVal || '—';
+    if (item.calcVal) {
+      const n = item.calcVal(emp, it, rate, tpm, hrs);
+      if (n !== null && n !== undefined && !isNaN(n)) {
+        valStr = n === 0 ? '$0/yr' : fmt(n) + '/yr';
+      } else if (item.staticVal) {
+        valStr = item.staticVal;
+      }
+    }
+    return `<div class="comp-roi-ctx-item">
+      <div class="comp-roi-ctx-lbl">${item.lbl}</div>
+      <div class="comp-roi-ctx-val">${valStr}</div>
+      <div class="comp-roi-ctx-sub">${item.sub}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('comp-roi-ctx-note').textContent = cd.note;
+  ctx.classList.add('visible');
+}
+
+function updateCompetitor(val) {
+  const card = document.getElementById('comp-card');
+  if (!val) { card.classList.remove('visible'); return; }
+
+  const c = COMPETITORS[val] || COMPETITORS.other;
+  document.getElementById('comp-ico').textContent = c.ico;
+  document.getElementById('comp-eyebrow').textContent = c.eyebrow;
+  document.getElementById('comp-title').textContent = c.title;
+  document.getElementById('comp-desc').textContent = c.desc;
+
+  // Pricing context line
+  let pctx = document.getElementById('comp-pricing-ctx');
+  if (!pctx) {
+    pctx = document.createElement('div');
+    pctx.id = 'comp-pricing-ctx';
+    pctx.style.cssText = 'font-size:11px;color:rgba(255,255,255,.55);background:rgba(255,255,255,.06);border-radius:6px;padding:7px 11px;margin-bottom:10px;line-height:1.5;';
+    document.getElementById('comp-desc').after(pctx);
+  }
+  pctx.textContent = '💲 ' + (c.pricingContext || '');
+
+  const pills = document.getElementById('comp-pills');
+  pills.innerHTML = '';
+  c.good.forEach(t => { const p = document.createElement('span'); p.className='comp-pill good'; p.textContent='✓ '+t; pills.appendChild(p); });
+  c.bad.forEach(t  => { const p = document.createElement('span'); p.className='comp-pill bad';  p.textContent='✗ '+t; pills.appendChild(p); });
+
+  // Update dynamic VS table
+  const labels = { servicenow:'ServiceNow', jira:'Jira Service Mgmt', freshservice:'Freshservice', cherwell:'Cherwell (EOL)', remedy:'BMC Remedy/Helix', remedyforce:'Remedyforce', email:'Email / Ad-Hoc', none:'No ITSM Today', other:'Current Tool' };
+  const label = labels[val] || 'Today';
+  document.getElementById('vs-before-hdr').textContent = label;
+
+  if (c.vsRows && c.vsRows.length) {
+    const tbody = document.getElementById('vs-tbody');
+    tbody.innerHTML = c.vsRows.map(([cat, before, after]) =>
+      `<tr><td>${cat}</td><td class="col-before">${before}</td><td class="col-after">${after}</td></tr>`
+    ).join('');
+  }
+
+  card.classList.add('visible');
+  renderCompRoiCtx(val);
+}
+
+// ══════════════════════════════════════════
+//  ROI CALCULATION
+// ══════════════════════════════════════════
+function fmt(n) {
+  if (n >= 1000000) return '$' + (n/1000000).toFixed(1) + 'M';
+  if (n >= 1000)    return '$' + (n/1000).toFixed(0) + 'K';
+  return '$' + Math.round(n).toLocaleString();
+}
+
+function recalcROI() {
+  const emp     = parseFloat(document.getElementById('roi-emp').value)     || 0;
+  const itStaff = parseFloat(document.getElementById('roi-it').value)      || 0;
+  const rate    = parseFloat(document.getElementById('roi-rate').value)    || 0;
+  const tpm     = parseFloat(document.getElementById('roi-tickets').value) || 0;
+  const hrs     = parseFloat(document.getElementById('roi-resolve').value) || 0;
+
+  document.getElementById('cfg-employees').value = emp || '';
+
+  // Re-render competitive pricing context with updated inputs
+  renderCompRoiCtx(document.getElementById('cfg-competitor').value);
+
+  // Update pricing section example
+  if (emp > 0 && itStaff > 0) {
+    const moDealer = (emp * 3) + (itStaff * 75);
+    const moList   = (emp * 15) + (itStaff * 75);
+    const saved    = moList - moDealer;
+    document.getElementById('price-example-calc').textContent = '$' + moDealer.toLocaleString() + '/mo';
+    const fn = document.getElementById('price-footnote-dynamic');
+    if (fn) fn.innerHTML = `Based on your inputs (${Math.round(emp).toLocaleString()} employees, ${Math.round(itStaff)} IT staff): dealer price = <strong>$${moDealer.toLocaleString()}/mo</strong> vs. list $${moList.toLocaleString()}/mo — <strong style="color:var(--brand-primary)">saving $${saved.toLocaleString()}/mo</strong>. `;
+  }
+
+  // Salesforce subscription cost — dealer price $3/emp vs list $15/emp
+  const EMP_DEALER = 3;
+  const EMP_LIST   = 15;
+  const sfCost     = (itStaff * 75 * 12) + (emp * EMP_DEALER * 12);
+  const sfCostList = (itStaff * 75 * 12) + (emp * EMP_LIST   * 12);
+  const empSavings = (EMP_LIST - EMP_DEALER) * emp * 12;
+
+  // Value returned by AI case deflection (40% of tickets auto-resolved, no IT touch)
+  const totalTicketsMonth = emp * tpm;
+  const deflected         = totalTicketsMonth * 0.40;
+  const hoursFreed        = deflected * hrs;
+  const deflectionValue   = hoursFreed * 12 * rate;   // annual labor value of deflected cases
+
+  const roi           = sfCost > 0 ? ((deflectionValue - sfCost) / sfCost * 100) : 0;
+  const paybackMonths = deflectionValue > 0 ? Math.max(1, Math.round(sfCost / (deflectionValue / 12))) : null;
+
+  document.getElementById('res-sfcost').textContent      = sfCost > 0 ? fmt(sfCost) + '/yr' : '—';
+  document.getElementById('res-emp-savings').textContent = empSavings > 0 ? fmt(empSavings) + '/yr' : '—';
+  document.getElementById('res-savings').textContent     = deflectionValue > 0 ? fmt(deflectionValue) : '—';
+  document.getElementById('res-roi').textContent      = roi > 0 ? Math.round(roi) + '%' : '—';
+  document.getElementById('res-payback').textContent  = paybackMonths ? paybackMonths + (paybackMonths===1?' month':' months') : '—';
+  document.getElementById('res-deflect').textContent  = totalTicketsMonth > 0 ? Math.round(deflected).toLocaleString() : '—';
+  document.getElementById('res-hours').textContent    = hoursFreed > 0 ? Math.round(hoursFreed).toLocaleString() + ' hrs' : '—';
+
+  // ── 1-page ROI summary doc ──
+  const comp = document.getElementById('cfg-competitor').value;
+  const compLabels = { servicenow:'ServiceNow', jira:'Jira Service Mgmt', freshservice:'Freshservice', cherwell:'Cherwell / Ivanti (EOL)', remedy:'BMC Remedy / Helix', remedyforce:'Remedyforce', email:'Email / Ad-Hoc', none:'No formal ITSM', other:'Current Tool', '':'Not specified' };
+  const dealer = document.getElementById('cfg-dealer').value.trim() || 'Your Dealership';
+
+  document.getElementById('roi-sum-title').textContent  = 'ROI Summary — ' + dealer;
+  document.getElementById('roi-sum-date').textContent   = 'Prepared ' + new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+  document.getElementById('roi-sum-badge').textContent  = dealer + ' · Dealer Program';
+
+  // KPIs
+  document.getElementById('sum-kpi-savings').textContent        = deflectionValue > 0 ? fmt(deflectionValue) : '—';
+  document.getElementById('sum-kpi-cost').textContent           = sfCost > 0 ? fmt(sfCost) : '—';
+  document.getElementById('sum-kpi-roi').textContent            = roi > 0 ? Math.round(roi) + '%' : '—';
+  document.getElementById('sum-kpi-dealer-savings').textContent = empSavings > 0 ? fmt(empSavings) : '—';
+
+  // Savings bar
+  if (emp > 0) {
+    document.getElementById('sum-bar-savings-text').textContent = '80% off ($3 vs. $15/emp/mo)';
+    document.getElementById('sum-bar-pill').textContent = empSavings > 0 ? fmt(empSavings) + '/yr saved' : 'Save $12/emp/mo';
+  }
+
+  const mkRow = (k, v) => `<div class="roi-sum-row"><span class="roi-sum-key">${k}</span><span class="roi-sum-val">${v}</span></div>`;
+
+  // Col 1: environment
+  document.getElementById('roi-sum-env-rows').innerHTML =
+    mkRow('Dealership', dealer) +
+    mkRow('Total Employees', emp > 0 ? emp.toLocaleString() : '—') +
+    mkRow('IT Staff / Fulfillers', itStaff > 0 ? itStaff : '—') +
+    mkRow('Current ITSM', compLabels[comp] || 'Not specified') +
+    mkRow('Tickets / Emp / Mo', tpm > 0 ? tpm : '—') +
+    mkRow('Total Tickets / Mo', totalTicketsMonth > 0 ? Math.round(totalTicketsMonth).toLocaleString() : '—') +
+    mkRow('Avg Resolution Time', hrs > 0 ? hrs + ' hrs' : '—');
+
+  // Col 2: deflection value
+  document.getElementById('roi-sum-value-rows').innerHTML =
+    mkRow('Cases Auto-Resolved / Mo', deflected > 0 ? Math.round(deflected).toLocaleString() + ' (40%)' : '—') +
+    mkRow('IT Hours Freed / Mo', hoursFreed > 0 ? Math.round(hoursFreed).toLocaleString() + ' hrs' : '—') +
+    mkRow('Deflection Value / Yr', deflectionValue > 0 ? fmt(deflectionValue) : '—') +
+    mkRow('Subscription Cost / Yr', sfCost > 0 ? fmt(sfCost) : '—') +
+    mkRow('Net ROI', roi > 0 ? Math.round(roi) + '%' : '—') +
+    mkRow('Payback Period', paybackMonths ? paybackMonths + ' months' : '—');
+
+  // Col 3: competitor-aware pricing
+  const compPricing = COMP_PRICING[comp];
+  if (compPricing && comp) {
+    document.getElementById('roi-sum-comp-title').textContent = 'vs. ' + (compLabels[comp] || 'Current Tool');
+    document.getElementById('roi-sum-comp-rows').innerHTML = compPricing.items.map(item => {
+      let valStr = item.staticVal || '—';
+      if (item.calcVal) {
+        const n = item.calcVal(emp, itStaff, rate, tpm, hrs);
+        if (n !== null && n !== undefined && !isNaN(n)) valStr = n === 0 ? '$0/yr' : fmt(n) + '/yr';
+        else if (item.staticVal) valStr = item.staticVal;
+      }
+      return mkRow(item.lbl, valStr);
+    }).join('');
+  } else {
+    document.getElementById('roi-sum-comp-title').textContent = 'Salesforce Subscription Detail';
+    document.getElementById('roi-sum-comp-rows').innerHTML =
+      mkRow('AI Agents · dealer price', emp > 0 ? fmt(emp * 3 * 12) + '/yr' : '—') +
+      mkRow('AI Agents · list price', emp > 0 ? fmt(emp * 15 * 12) + '/yr' : '—') +
+      mkRow('IT Service Desk EE', itStaff > 0 ? fmt(itStaff * 75 * 12) + '/yr' : '—') +
+      mkRow('Total (dealer pricing)', sfCost > 0 ? fmt(sfCost) + '/yr' : '—') +
+      mkRow('Dealer savings vs. list', empSavings > 0 ? fmt(empSavings) + '/yr' : '—');
+  }
+
+  if (emp > 0 && itStaff > 0) document.getElementById('roi-summary').classList.add('visible');
+}
+
+function scheduleDemo() {
+  // Pre-fill modal with known dealer info
+  const dealer = document.getElementById('cfg-dealer').value.trim();
+  if (dealer) document.getElementById('m-company').value = dealer;
+  updateModalPreview();
+  document.getElementById('demo-modal').classList.add('open');
+}
+
+function closeModal() {
+  document.getElementById('demo-modal').classList.remove('open');
+}
+
+function updateModalPreview() {
+  const dealer  = document.getElementById('cfg-dealer').value.trim() || 'Your Dealership';
+  const comp    = document.getElementById('cfg-competitor').value;
+  const compLabels = { servicenow:'ServiceNow', jira:'Jira Service Mgmt', freshservice:'Freshservice', cherwell:'Cherwell (EOL)', remedy:'BMC Remedy', remedyforce:'Remedyforce', email:'Email/Ad-Hoc', none:'No formal ITSM', other:'Current Tool', '':'Not specified' };
+  const savings = document.getElementById('res-savings').textContent;
+  const sfcost  = document.getElementById('res-sfcost').textContent;
+  const roi     = document.getElementById('res-roi').textContent;
+  const payback = document.getElementById('res-payback').textContent;
+  const emp     = document.getElementById('roi-emp').value;
+  const it      = document.getElementById('roi-it').value;
+  document.getElementById('modal-roi-preview').innerHTML =
+    `<strong>${dealer}</strong> · ${emp} employees · ${it} IT staff · Current tool: ${compLabels[comp]||'Not specified'}<br>` +
+    `Subscription: <strong>${sfcost}</strong> · Deflection value: <strong>${savings}</strong> · ROI: <strong>${roi}</strong> · Payback: <strong>${payback}</strong>`;
+}
+
+function submitDemo() {
+  const fname   = document.getElementById('m-fname').value.trim();
+  const lname   = document.getElementById('m-lname').value.trim();
+  const email   = document.getElementById('m-email').value.trim();
+  const phone   = document.getElementById('m-phone').value.trim();
+  const company = document.getElementById('m-company').value.trim();
+  const notes   = document.getElementById('m-notes').value.trim();
+
+  if (!fname || !email) { alert('Please enter your name and email.'); return; }
+
+  const dealer  = document.getElementById('cfg-dealer').value.trim() || company || 'Your Dealership';
+  const comp    = document.getElementById('cfg-competitor').value;
+  const compLabels = { servicenow:'ServiceNow', jira:'Jira Service Mgmt', freshservice:'Freshservice', cherwell:'Cherwell (EOL)', remedy:'BMC Remedy', remedyforce:'Remedyforce', email:'Email/Ad-Hoc', none:'No formal ITSM', other:'Current Tool', '':'Not specified' };
+  const savings = document.getElementById('res-savings').textContent;
+  const sfcost  = document.getElementById('res-sfcost').textContent;
+  const roi     = document.getElementById('res-roi').textContent;
+  const payback = document.getElementById('res-payback').textContent;
+  const emp     = document.getElementById('roi-emp').value;
+  const it      = document.getElementById('roi-it').value;
+  const deflect = document.getElementById('res-deflect').textContent;
+  const hours   = document.getElementById('res-hours').textContent;
+  const date    = new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
+
+  const description =
+`Current ITSM: ${compLabels[comp] || 'Not specified'}
+Employees: ${emp} | IT Staff: ${it}
+SF Subscription Est: ${sfcost}
+Case Deflection Value: ${savings}
+Cases Auto-Resolved/Mo: ${deflect}
+IT Hours Freed/Mo: ${hours}
+Net ROI: ${roi} | Payback: ${payback}
+Notes: ${notes || 'None'}
+Submitted: ${date} via Agentforce IT Service Dealer Outreach Tool`;
+
+  // Build hidden Web-to-Lead form and submit silently
+  const form = document.createElement('form');
+  form.method = 'POST';
+  form.action = 'https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8';
+  form.style.display = 'none';
+
+  const fields = {
+    oid:             '00D000000000062EAA',
+    retURL:          window.location.href + '?demo=submitted',
+    first_name:      fname,
+    last_name:       lname,
+    email:           email,
+    phone:           phone,
+    company:         company || dealer,
+    lead_source:     'Web',
+    description:     description,
+    // Map to standard Lead fields
+    '00N_employees': emp,           // custom field placeholder — works as description fallback
+  };
+
+  Object.entries(fields).forEach(([name, value]) => {
+    const input = document.createElement('input');
+    input.type  = 'hidden';
+    input.name  = name;
+    input.value = value;
+    form.appendChild(input);
+  });
+
+  document.body.appendChild(form);
+  form.submit();
+
+  // Show confirmation immediately (retURL handles the redirect)
+  closeModal();
+  showConfirmation(fname, company || dealer);
+}
+
+function showConfirmation(fname, company) {
+  const banner = document.createElement('div');
+  banner.style.cssText = `
+    position:fixed; top:20px; left:50%; transform:translateX(-50%);
+    background:#032D60; color:#fff; border-radius:10px; padding:16px 28px;
+    box-shadow:0 8px 32px rgba(0,0,0,.25); z-index:2000; font-size:14px;
+    border-left:4px solid #FFDE00; max-width:480px; text-align:center; line-height:1.5;
+    animation: modalIn .2s ease;
+  `;
+  banner.innerHTML = `<strong>✅ Lead created in Salesforce!</strong><br>
+    <span style="font-size:12px;color:rgba(255,255,255,.7);">
+      ${fname} · ${company} has been sent to Fabian's queue in org62.
+    </span>`;
+  document.body.appendChild(banner);
+  setTimeout(() => banner.remove(), 5000);
+}
+
+function printROI() {
+  document.getElementById('roi-summary').classList.add('visible');
+  window.print();
+}
+
+function silTab(name, el) {
+  document.querySelectorAll('.sil-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.sil-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('sil-' + name).classList.add('active');
+}
+
+// Init
+recalcROI();
+
+// Show confirmation if returning from Web-to-Lead retURL
+if (window.location.search.includes('demo=submitted')) {
+  showConfirmation('Your contact', 'your dealership');
+}
+</script>
+</body>
+</html>
