@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentforce IT Service — Dealer Outreach</title>
+<title>Agentforce IT Service — Roper Technologies</title>
 <style>
 /* ── BRAND TOKENS (swap per customer) ── */
 :root {
-  --dealer-name:       "John Deere";
-  --brand-primary:     #367C2B;   /* JD green */
-  --brand-secondary:   #FFDE00;   /* JD yellow */
-  --brand-dark:        #1F4A18;
-  --brand-text-on:     #000;      /* text on secondary */
+  --dealer-name:       "Roper Technologies";
+  --brand-primary:     #003478;   /* Roper navy */
+  --brand-secondary:   #A8C8F0;   /* Roper light blue accent */
+  --brand-dark:        #001d4a;
+  --brand-text-on:     #001d4a;   /* text on secondary */
   --sf-navy:           #032D60;
   --sf-blue:           #0070D2;
   --sf-cloud:          #00A1E0;
@@ -610,27 +610,16 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div class="hdr-divider"></div>
     <span class="hdr-product">Agentforce IT Service</span>
   </div>
-  <div class="dealer-badge" id="dealer-badge">John Deere Dealer Program</div>
+  <div class="dealer-badge" id="dealer-badge">Roper Technologies</div>
 </div>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-inner">
     <div class="hero-text">
-      <div class="hero-eyebrow">Prepared for <span id="hero-dealer-name">Your Dealership</span></div>
+      <div class="hero-eyebrow">Prepared for <span id="hero-dealer-name">Roper Technologies</span></div>
       <div class="hero-title">The IT platform that <strong>pays for itself</strong><br>— and runs itself.</div>
-      <div class="hero-sub">Agentforce IT Service is the best-in-class ITSM for IT leaders who want to maximize employee experience and asset management without adding headcount. Transparent subscription pricing. AI case deflection that returns more than it costs. Built on the world's #1 service platform — self-sustaining from day one.</div>
-    </div>
-    <div class="hero-photos">
-      <img src="https://www.deere.com/assets/images/region-4/industries/agriculture/sugar-harvester/r4k072428_rrd-1024x576.jpg"
-           alt="John Deere sugar cane harvest" referrerpolicy="no-referrer"
-           onerror="this.style.opacity='.15'">
-      <img src="https://www.deere.com/assets/images/common/industries/agriculture/r2g085102-spfh-ag-carousel-1024x576.jpg"
-           alt="John Deere operator in field" referrerpolicy="no-referrer"
-           onerror="this.style.opacity='.15'">
-      <img src="https://www.deere.com/assets/images/common/news/generic-news-icons-2025/US-impact-768x432.jpg"
-           alt="John Deere worker and field" referrerpolicy="no-referrer"
-           onerror="this.style.opacity='.15'">
+      <div class="hero-sub">Agentforce IT Service is the best-in-class ITSM for enterprise IT leaders who want to maximize employee experience and asset management across a distributed portfolio — without adding headcount. Transparent subscription pricing. AI case deflection that returns more than it costs. Built on the world's #1 service platform.</div>
     </div>
   </div>
 </div>
@@ -639,8 +628,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 <div class="config-band">
   <div class="config-inner">
     <div>
-      <div class="config-label">Your Dealership Name</div>
-      <input class="config-input" id="cfg-dealer" type="text" placeholder="e.g. Ag-Pro Companies" oninput="updateDealer(this.value)">
+      <div class="config-label">Your Organization</div>
+      <input class="config-input" id="cfg-dealer" type="text" placeholder="e.g. Roper Technologies" oninput="updateDealer(this.value)">
     </div>
     <div>
       <div class="config-label">Number of Employees</div>
@@ -700,8 +689,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       </div>
       <div class="roi-input-row">
         <div class="roi-input-label">Total Employees</div>
-        <input class="roi-input-field" id="roi-emp" type="number" value="250" oninput="syncAndRecalc('roi-emp','cfg-employees')">
-        <div class="roi-hint">Drives AI Agents for Employees cost ($3/emp/mo dealer · $15 list)</div>
+        <input class="roi-input-field" id="roi-emp" type="number" value="18200" oninput="syncAndRecalc('roi-emp','cfg-employees')">
+        <div class="roi-hint">Drives AI Agents for Employees cost ($15/emp/mo list price)</div>
       </div>
       <div class="roi-input-row">
         <div class="roi-input-label">IT Staff / Fulfillers</div>
@@ -716,7 +705,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="roi-input-row">
         <div class="roi-input-label">Tickets / Employee / Month</div>
         <input class="roi-input-field" id="roi-tickets" type="number" value="2" oninput="recalcROI()">
-        <div class="roi-hint">Typical: 1–4 for dealer environment</div>
+        <div class="roi-hint">Typical: 1–4 for enterprise software organizations</div>
       </div>
       <div class="roi-input-row">
         <div class="roi-input-label">Avg Resolution Time / Ticket (hrs)</div>
@@ -729,17 +718,17 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       <div class="roi-result-card" style="background:#F0FDF4;border-color:#bbf7d0;">
         <div class="roi-result-ico">🧾</div>
         <div class="roi-result-body">
-          <div class="roi-result-label" style="color:#166534;">Est. Annual Subscription (Dealer Price)</div>
+          <div class="roi-result-label" style="color:#166534;">Est. Annual Subscription</div>
           <div class="roi-result-num" id="res-sfcost" style="color:#166534;">—</div>
-          <div class="roi-result-sub" id="res-sfcost-sub">$75/IT fulfiller/mo + $3/employee/mo (dealer offer)</div>
+          <div class="roi-result-sub" id="res-sfcost-sub">$75/IT fulfiller/mo + $15/employee/mo (list price)</div>
         </div>
       </div>
       <div class="roi-result-card" style="background:#FEFCE8;border-color:#fde68a;">
         <div class="roi-result-ico">🏷️</div>
         <div class="roi-result-body">
-          <div class="roi-result-label" style="color:#92400E;">Your Dealer Savings vs. List</div>
+          <div class="roi-result-label" style="color:#92400E;">Enterprise vs. Status Quo</div>
           <div class="roi-result-num" id="res-emp-savings" style="color:#92400E;">—</div>
-          <div class="roi-result-sub">$3/emp/mo dealer vs. $15/emp/mo list price</div>
+          <div class="roi-result-sub">Annual labor cost of manual IT handling (without AI)</div>
         </div>
       </div>
       <div class="roi-result-card highlight">
@@ -796,7 +785,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <!-- CAPABILITIES -->
   <div class="sec-hd">
     <div class="sec-eyebrow">Platform Capabilities</div>
-    <div class="sec-title">Everything your dealer IT team needs — one platform</div>
+    <div class="sec-title">Everything your enterprise IT team needs — one platform</div>
     <div class="sec-sub">Built on Service Cloud, the #1 service platform. Self-sustaining by design — AI handles the routine so your IT team focuses on what matters.</div>
   </div>
 
@@ -840,13 +829,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div class="cap-card">
       <div class="cap-ico">🔌</div>
       <div class="cap-title">240+ Connectors</div>
-      <div class="cap-desc">MuleSoft connectors for your DMS, ERP, and dealership systems. Works with what you have — no rip-and-replace required to get started.</div>
+      <div class="cap-desc">MuleSoft connectors for your ERP, HR, and portfolio systems. Works with what you have — no rip-and-replace required to get started.</div>
       <span class="cap-tag">MuleSoft Included</span>
     </div>
     <div class="cap-card" style="border-top-color:var(--sf-yellow);">
       <div class="cap-ico">⚡</div>
       <div class="cap-title">Minutes, Not Months</div>
-      <div class="cap-desc">Salesforce Go Configuration Assistant gets you live fast. No long implementation. No army of consultants. Standard dealer deployments measured in weeks.</div>
+      <div class="cap-desc">Salesforce Go Configuration Assistant gets you live fast. No long implementation. No army of consultants. Standard enterprise deployments measured in weeks.</div>
       <span class="cap-tag" style="background:#FEFCE8;color:#A16207;">Fast Time-to-Value</span>
     </div>
   </div>
@@ -905,15 +894,15 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     <div class="sec-sub">General employees get AI self-service in Slack. Your IT team gets the full service desk. No forced bundles — start with what you need.</div>
   </div>
 
-  <!-- Special offer banner -->
+  <!-- Enterprise program banner -->
   <div class="price-section-intro">
     <div>
-      <div class="price-offer-badge">🎁 Special Offer · John Deere Dealer Program</div>
-      <div class="price-offer-title">$3/employee/month — 80% off list price on AI Agents for Employees</div>
-      <div class="price-offer-sub">Exclusively for John Deere dealers. Minimum 100 users. Contact your Salesforce AE to activate.</div>
+      <div class="price-offer-badge">🏢 Enterprise Program · Roper Technologies</div>
+      <div class="price-offer-title">Transparent per-seat pricing — no surprise renewals or hidden upgrade fees</div>
+      <div class="price-offer-sub">Enterprise volume pricing available. Contact your Salesforce AE for a custom quote tailored to Roper's portfolio.</div>
     </div>
     <div class="price-offer-pill">
-      $3<span>vs. $15 list</span>
+      $15<span>per employee/mo</span>
     </div>
   </div>
 
@@ -921,23 +910,21 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
     <!-- Card 1: General employees -->
     <div class="price-card featured">
-      <div class="price-badge">Special Dealer Price</div>
+      <div class="price-badge">Enterprise Offer</div>
       <span class="price-audience emp">For All Employees</span>
       <div class="price-tier">AI Self-Service</div>
       <div class="price-name">AI Agents for Employees</div>
       <div class="price-row">
-        <div class="price-amount dealer">$3</div>
-        <div class="price-list-strike">$15</div>
-        <span class="price-save-tag">Save 80%</span>
+        <div class="price-amount">$15</div>
       </div>
-      <div class="price-per">per employee / month · min. 100 users</div>
+      <div class="price-per">per employee / month · list price</div>
       <div class="price-rule"></div>
       <div class="price-feat">AI resolves IT requests in <strong>Slack</strong> — no ticket, no portal</div>
       <div class="price-feat">Password resets, account unlocks, software requests</div>
       <div class="price-feat">50+ out-of-box agents — active day one</div>
       <div class="price-feat">Works alongside any existing ITSM tool</div>
       <div class="price-feat">Deflects 40%+ of cases before IT is ever involved</div>
-      <div class="price-promo">🤝 Dealer exclusive: $3/emp/mo vs. $15 list. Requires 100+ users. Talk to your AE to unlock.</div>
+      <div class="price-promo">🤝 Enterprise volume pricing available — contact your Salesforce AE for a custom quote.</div>
     </div>
 
     <!-- Card 2: IT Service Desk EE -->
@@ -980,14 +967,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
   </div>
   <div class="price-footnote">
-    <strong>How to read this:</strong> Every employee gets the AI self-service license ($3 dealer / $15 list). Your IT team also gets an IT Service Desk license ($75 or $150). A 250-person dealership with 5 IT staff = 250 × $3 + 5 × $75 = <strong id="price-example-calc">$1,125/mo</strong> with the dealer offer.<br>
-    <span id="price-footnote-dynamic"></span>Dealer pricing requires minimum 100 users and activation by your Salesforce AE. Pricing shown is directional — contact your AE for a formal quote.
+    <strong>How to read this:</strong> Every employee gets the AI self-service license ($15/emp/mo list). Your IT team also gets an IT Service Desk license ($75 or $150). An 18,200-person enterprise with 15 IT staff = 18,200 × $15 + 15 × $75 = <strong id="price-example-calc">$274,125/mo</strong> at list — enterprise volume pricing available.<br>
+    <span id="price-footnote-dynamic"></span>Enterprise volume pricing available for qualified accounts. Pricing shown is directional — contact your Salesforce AE for a formal quote.
   </div>
 
   <!-- ROI SUMMARY (1-page print doc) -->
   <div class="roi-summary-box" id="roi-summary">
 
-    <!-- Co-branded header: Salesforce left, John Deere right -->
+    <!-- Co-branded header: Salesforce left, Roper right -->
     <div class="roi-sum-hdr">
       <div class="roi-sum-hdr-sf">
         <div class="roi-sum-hdr-logo">
@@ -997,14 +984,14 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <div class="roi-sum-hdr-product">Agentforce IT Service · Business Value Assessment</div>
       </div>
       <div class="roi-sum-hdr-jd">
-        <div class="roi-sum-hdr-dealer" id="roi-sum-badge">John Deere Dealer Program</div>
-        <div class="roi-sum-hdr-sub-jd">Prepared exclusively for your dealership</div>
+        <div class="roi-sum-hdr-dealer" id="roi-sum-badge">Roper Technologies</div>
+        <div class="roi-sum-hdr-sub-jd">Prepared exclusively for your organization</div>
       </div>
     </div>
 
     <!-- Title band -->
     <div class="roi-sum-title-band">
-      <div class="roi-sum-title" id="roi-sum-title">ROI Summary — Your Dealership</div>
+      <div class="roi-sum-title" id="roi-sum-title">ROI Summary — Roper Technologies</div>
       <div class="roi-sum-date" id="roi-sum-date"></div>
     </div>
 
@@ -1020,7 +1007,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
         <div class="roi-sum-kpi">
           <div class="roi-sum-kpi-lbl">Annual Subscription</div>
           <div class="roi-sum-kpi-val" id="sum-kpi-cost">—</div>
-          <div class="roi-sum-kpi-sub">At dealer pricing</div>
+          <div class="roi-sum-kpi-sub">At list pricing</div>
         </div>
         <div class="roi-sum-kpi">
           <div class="roi-sum-kpi-lbl">Net ROI</div>
@@ -1028,19 +1015,19 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
           <div class="roi-sum-kpi-sub">Return on subscription</div>
         </div>
         <div class="roi-sum-kpi hl-savings2">
-          <div class="roi-sum-kpi-lbl">Dealer Savings vs. List</div>
+          <div class="roi-sum-kpi-lbl">Net First-Year Savings</div>
           <div class="roi-sum-kpi-val" id="sum-kpi-dealer-savings">—</div>
-          <div class="roi-sum-kpi-sub">$3/emp vs. $15 list · annual</div>
+          <div class="roi-sum-kpi-sub">Deflection value minus subscription · year 1</div>
         </div>
       </div>
 
-      <!-- Dealer savings bar -->
+      <!-- Enterprise value bar -->
       <div class="roi-sum-savings-bar">
         <div>
-          <div class="roi-sum-savings-bar-text">Special offer: <span id="sum-bar-savings-text">80% off</span> on AI Agents for Employees</div>
-          <div class="roi-sum-savings-bar-sub">$3/employee/month dealer price · $15/month list · minimum 100 users · exclusive to John Deere dealers</div>
+          <div class="roi-sum-savings-bar-text">Enterprise program: <span id="sum-bar-savings-text">net positive ROI</span> from AI case deflection</div>
+          <div class="roi-sum-savings-bar-sub">$15/employee/month list · $75/IT fulfiller/month · volume pricing available · contact your Salesforce AE</div>
         </div>
-        <div class="roi-sum-savings-pill" id="sum-bar-pill">Save $12/emp/mo</div>
+        <div class="roi-sum-savings-pill" id="sum-bar-pill">Positive ROI</div>
       </div>
 
       <!-- Three columns: environment · value · pricing -->
@@ -1070,7 +1057,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
     </div>
 
     <div class="roi-sum-footer">
-      <span>Directional estimates based on Salesforce BVA benchmarks. 40% AI deflection rate. $75/IT fulfiller/mo (IT Service Desk EE) · $3/emp/mo dealer offer (list $15) · min. 100 users. Contact your Salesforce AE for a formal quote.</span>
+      <span>Directional estimates based on Salesforce BVA benchmarks. 40% AI deflection rate. $75/IT fulfiller/mo (IT Service Desk EE) · $15/emp/mo list price. Enterprise volume pricing available. Contact your Salesforce AE for a formal quote.</span>
       <div class="roi-sum-footer-brand">Salesforce · Agentforce IT Service</div>
     </div>
 
@@ -1217,12 +1204,12 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
       <div class="sil-customer-card" style="background:linear-gradient(135deg,#f0f6ff,#e8f4f8);border-color:#c7dff7;">
         <div class="sil-customer-logo-area">
-          <div style="font-size:24px;">🚜</div>
+          <div style="font-size:22px; font-weight:900; color:#003478; letter-spacing:-1px;">ROPER</div>
         </div>
-        <div class="sil-customer-name">Your Dealership</div>
-        <div class="sil-customer-industry">Agriculture / Equipment</div>
-        <div class="sil-customer-quote">"Be the next dealer to transform IT from a cost center into a competitive advantage — with AI that pays for itself."</div>
-        <div class="sil-customer-stat" style="background:var(--brand-primary);color:var(--brand-secondary);">Dealer offer: $3/emp/mo</div>
+        <div class="sil-customer-name">Roper Technologies</div>
+        <div class="sil-customer-industry">Diversified Technology Software</div>
+        <div class="sil-customer-quote">"Transform IT across a 18,000+ person portfolio from a cost center into a competitive advantage — with AI that pays for itself."</div>
+        <div class="sil-customer-stat" style="background:var(--brand-primary);color:var(--brand-secondary);">Enterprise ITSM · 18,200+ employees</div>
       </div>
 
     </div>
@@ -1232,8 +1219,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
   <div class="cta-section">
     <div class="cta-body">
       <div class="cta-eyebrow">Ready to see it live?</div>
-      <div class="cta-title" id="cta-title">See Agentforce IT Service in action for your dealership.</div>
-      <div class="cta-sub">30-minute live demo tailored to your dealership size and current tool. See exactly what it costs, what it deflects, and what your IT team gets back.</div>
+      <div class="cta-title" id="cta-title">See Agentforce IT Service in action for Roper Technologies.</div>
+      <div class="cta-sub">30-minute live demo tailored to your organization size and current tool. See exactly what it costs, what it deflects, and what your IT team gets back.</div>
     </div>
     <div class="cta-btns">
       <button class="cta-btn-primary" onclick="scheduleDemo()">📅 Schedule a Demo</button>
@@ -1267,7 +1254,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
       </div>
       <div class="modal-field">
         <div class="modal-label">Email</div>
-        <input class="modal-input" id="m-email" type="email" placeholder="jane@dealership.com">
+        <input class="modal-input" id="m-email" type="email" placeholder="jane@roper.com">
       </div>
       <div class="modal-two-col">
         <div class="modal-field">
@@ -1275,8 +1262,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
           <input class="modal-input" id="m-phone" type="tel" placeholder="(555) 000-0000">
         </div>
         <div class="modal-field">
-          <div class="modal-label">Dealership Name</div>
-          <input class="modal-input" id="m-company" type="text" placeholder="Acme Ag Equipment">
+          <div class="modal-label">Organization Name</div>
+          <input class="modal-input" id="m-company" type="text" placeholder="Roper Technologies">
         </div>
       </div>
       <div class="modal-field">
@@ -1293,7 +1280,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 
 <!-- FOOTER -->
 <div class="footer">
-  <span>Salesforce Agentforce IT Service · Dealer Outreach Program</span>
+  <span>Salesforce Agentforce IT Service · Enterprise Outreach Program</span>
   <span>Pricing and ROI estimates are directional. Contact your Salesforce AE for a custom quote.</span>
 </div>
 
@@ -1302,7 +1289,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; b
 //  BRAND / DEALER CONFIG
 // ══════════════════════════════════════════
 function updateDealer(name) {
-  const safe = name.trim() || 'Your Dealership';
+  const safe = name.trim() || 'Roper Technologies';
   document.getElementById('hero-dealer-name').textContent = safe;
   document.getElementById('dealer-badge').textContent = safe + ' · IT Modernization';
   document.getElementById('cta-title').textContent = 'See Agentforce IT Service in action for ' + safe + '.';
@@ -1364,14 +1351,14 @@ const COMPETITORS = {
     ico: '🌿',
     eyebrow: 'Comparing vs. Freshservice',
     title: 'Freshservice is $49–99/agent/month — and AI is only unlocked at Enterprise.',
-    desc: 'Freshservice publishes clear pricing: $49/agent/month (Pro) or $99/agent/month (Enterprise) for full ITSM. Freddy AI — their AI assistant for case deflection and smart routing — is only included at the Enterprise tier (custom pricing). Salesforce Agentforce IT Service includes native AI agents at every tier, connects directly to your existing tech stack via 240+ MuleSoft connectors, and scales across multiple dealer locations without the multi-entity constraints Freshservice customers routinely hit.',
+    desc: 'Freshservice publishes clear pricing: $49/agent/month (Pro) or $99/agent/month (Enterprise) for full ITSM. Freddy AI — their AI assistant for case deflection and smart routing — is only included at the Enterprise tier (custom pricing). Salesforce Agentforce IT Service includes native AI agents at every tier, connects directly to your existing tech stack via 240+ MuleSoft connectors, and scales across multiple portfolio companies without the multi-entity constraints Freshservice customers routinely hit.',
     pricingContext: 'Freshservice Pro: $49/agent/mo · Enterprise (AI included): custom pricing. Salesforce: $75/IT fulfiller/mo with AI agents built in.',
-    good: ['AI case deflection included — no upgrade needed', 'Scales across multi-location dealer networks', '240+ connectors to your existing stack', 'Unified with CRM + Service Cloud if needed'],
+    good: ['AI case deflection included — no upgrade needed', 'Scales across multi-entity portfolio companies', '240+ connectors to your existing stack', 'Unified with CRM + Service Cloud if needed'],
     bad: ['Freshservice: AI locked to Enterprise tier', 'Freshservice: $49–99/agent before AI costs', 'Freshservice: limited multi-entity support', 'Freshservice: no native CRM connection'],
     vsRows: [
       ['Price w/ AI', 'AI only at Enterprise (custom)', '$75/IT fulfiller/mo — AI included'],
       ['Case Deflection', 'Freddy AI: Enterprise-only', 'Agentforce: 40%+ deflection at all tiers'],
-      ['Multi-location', 'Limited multi-entity support', 'Built for multi-site dealer networks'],
+      ['Multi-location', 'Limited multi-entity support', 'Built for multi-entity enterprise portfolios'],
       ['CRM Integration', 'Separate platform, no native link', 'Native Salesforce — unified customer + IT data'],
       ['Asset Management', 'First 100 assets free; then charged', 'CMDB included — unlimited assets'],
       ['Connectors', '~50 native integrations', '240+ MuleSoft connectors'],
@@ -1506,7 +1493,7 @@ const COMP_PRICING = {
       { lbl: 'ServiceNow Licensing', calcVal: (emp, it) => null, staticVal: 'Custom quote', sub: 'Not published; requires direct negotiation each renewal' },
       { lbl: 'Typical Upgrade Projects', calcVal: () => null, staticVal: '$50K–$200K+', sub: 'Platform upgrades require IT resources + consulting engagement' },
       { lbl: 'Dedicated Admin Overhead', calcVal: (emp, it) => it * 85000, sub: 'Estimated FTE cost to maintain ServiceNow platform (~1 dedicated admin)' },
-      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '$75/IT fulfiller/mo + $3/emp/mo (dealer) vs. $15 list — full platform, no upgrade fees' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 15 * 12), sub: '$75/IT fulfiller/mo + $15/emp/mo list — full platform, no upgrade fees' },
     ],
     note: 'ServiceNow does not publish pricing. Independent research and G2 reviews consistently cite licensing + upgrade complexity as the top pain point for mid-market customers. Salesforce cost is fully transparent and includes all upgrades.'
   },
@@ -1517,7 +1504,7 @@ const COMP_PRICING = {
       { lbl: 'Jira Premium (est.)', calcVal: (emp, it) => it * 40 * 12, sub: '$40/agent/mo (Premium tier) — required for advanced ITSM features' },
       { lbl: 'Rovo AI Add-on (est.)', calcVal: (emp, it) => it * 25 * 12, sub: '~$25/user/mo for Atlassian AI (Rovo) — separate subscription, not included' },
       { lbl: 'Jira Total w/ AI (est.)', calcVal: (emp, it) => (it * 40 * 12) + (it * 25 * 12), sub: 'Combined agent + AI cost — before CMDB add-ons' },
-      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '$75/IT fulfiller/mo + $3/emp/mo dealer ($15 list) — AI agents, CMDB, ITIL all included' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 15 * 12), sub: '$75/IT fulfiller/mo + $15/emp/mo list price — AI agents, CMDB, ITIL all included' },
     ],
     note: 'Jira Standard: $20/agent/mo · Jira Premium: $40/agent/mo (published by Atlassian). Rovo AI is a separate subscription. Full CMDB and advanced reporting require additional configuration or add-ons. Salesforce ITSM includes all of this in one subscription.'
   },
@@ -1528,7 +1515,7 @@ const COMP_PRICING = {
       { lbl: 'Freshservice Pro (est.)', calcVal: (emp, it) => it * 99 * 12, sub: '$99/agent/mo (Pro) — required for full ITIL; AI locked to Enterprise' },
       { lbl: 'AI Upgrade (Enterprise)', calcVal: () => null, staticVal: 'Custom pricing', sub: 'Freddy AI only available at Enterprise tier — requires a new quote' },
       { lbl: 'Freshservice Pro Total', calcVal: (emp, it) => it * 99 * 12, sub: 'Pro without AI — 100 assets free, then additional asset charges' },
-      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '\$75/IT fulfiller/mo + \$3/emp/mo dealer (\$15 list) — AI agents + CMDB included at all tiers' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 15 * 12), sub: '\$75/IT fulfiller/mo + \$15/emp/mo list — AI agents + CMDB included at all tiers' },
     ],
     note: 'Freshservice publishes pricing: Starter $19, Growth $49, Pro $99 per agent/month. Freddy AI (case deflection, smart routing) is only included at Enterprise — custom pricing. Salesforce Agentforce case deflection is included at every tier.'
   },
@@ -1539,7 +1526,7 @@ const COMP_PRICING = {
       { lbl: 'Cherwell Maintenance Fee', calcVal: () => null, staticVal: '18–22% of license/yr', sub: 'Typical legacy software maintenance on an EOL product with no new features' },
       { lbl: 'Security Risk Premium', calcVal: () => null, staticVal: 'Unquantified', sub: 'Diminishing security patches increase exposure — compliance and audit risk' },
       { lbl: 'Forced Migration Cost', calcVal: () => null, staticVal: '$75K–$300K+', sub: 'Migration will be required — the longer you wait, the higher the cost' },
-      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '\$75/IT fulfiller/mo + \$3/emp/mo dealer (\$15 list) — migrate now, avoid the forced timeline' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 15 * 12), sub: '\$75/IT fulfiller/mo + \$15/emp/mo list — migrate now, avoid the forced timeline' },
     ],
     note: 'Ivanti Cherwell is end-of-life. Every dollar spent on maintenance today returns zero new capability. Migrating to Salesforce now resets your TCO and adds AI case deflection from day one.'
   },
@@ -1550,7 +1537,7 @@ const COMP_PRICING = {
       { lbl: 'BMC License', calcVal: () => null, staticVal: 'Custom — enterprise-only', sub: 'No published pricing; typically bundled with professional services' },
       { lbl: 'Implementation Services', calcVal: () => null, staticVal: '$200K–$1M+', sub: 'BMC-certified consultants required for implementation and upgrades' },
       { lbl: 'Specialist Admin (annual)', calcVal: (emp, it) => it * 110000, sub: 'Estimated annual cost of BMC-certified admin to maintain the platform' },
-      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '\$75/IT fulfiller/mo + \$3/emp/mo dealer (\$15 list) — your team self-administers, no specialists' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 15 * 12), sub: '\$75/IT fulfiller/mo + \$15/emp/mo list — your team self-administers, no specialists' },
     ],
     note: 'BMC Remedy/Helix is designed for large enterprises with dedicated BMC specialists on staff. Mid-market customers consistently cite specialist dependency as a hidden cost driver. Salesforce ITSM is designed to be self-administered by your existing IT team.'
   },
@@ -1559,7 +1546,7 @@ const COMP_PRICING = {
     model: 'Same Salesforce org — incremental cost only',
     items: [
       { lbl: 'Your Current SF Spend', calcVal: () => null, staticVal: 'Existing contract', sub: 'Remedyforce runs in your current Salesforce org — no new vendor' },
-      { lbl: 'Agentforce IT Service Add', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '\$75/IT fulfiller/mo + \$3/emp/mo dealer (\$15 list) added to your existing org' },
+      { lbl: 'Agentforce IT Service Add', calcVal: (emp, it) => (it * 75 * 12) + (emp * 15 * 12), sub: '\$75/IT fulfiller/mo + \$15/emp/mo list added to your existing org' },
       { lbl: 'Case Deflection Value', calcVal: () => null, staticVal: 'See calculator →', sub: 'AI agents begin deflecting cases immediately — value offsets cost in months' },
       { lbl: 'Migration Effort', calcVal: () => null, staticVal: 'Configuration only', sub: 'No data migration — same org, same data, configuration upgrade' },
     ],
@@ -1571,7 +1558,7 @@ const COMP_PRICING = {
     items: [
       { lbl: 'Current IT Tool Cost', calcVal: () => 0, staticVal: '$0/yr', sub: 'No license fee — but 100% of tickets are manual, 0% deflected' },
       { lbl: 'Est. Annual IT Labor (manual)', calcVal: (emp, it, rate, tpm, hrs) => emp * tpm * hrs * rate * 12, sub: 'All tickets resolved manually — full labor cost, no automation' },
-      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '\$75/IT fulfiller/mo + \$3/emp/mo dealer (\$15 list) — deflects 40% automatically' },
+      { lbl: 'Salesforce Annual Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 15 * 12), sub: '\$75/IT fulfiller/mo + \$15/emp/mo list — deflects 40% automatically' },
       { lbl: 'Net Cost After Deflection', calcVal: (emp, it, rate, tpm, hrs) => {
           const sfCost = (it * 75 * 12) + (emp * 5 * 12);
           const deflectionSavings = emp * tpm * 0.4 * hrs * rate * 12;
@@ -1586,7 +1573,7 @@ const COMP_PRICING = {
     items: [
       { lbl: 'Current ITSM Cost', calcVal: () => 0, staticVal: '$0/yr', sub: 'No tool today — but every request is manual and untracked' },
       { lbl: 'Est. Annual IT Labor (manual)', calcVal: (emp, it, rate, tpm, hrs) => emp * tpm * hrs * rate * 12, sub: 'Full labor cost — no automation, no deflection, no tracking' },
-      { lbl: 'Salesforce Entry Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: '$5/emp/mo (AI agents) + $75/IT fulfiller/mo (full ITSM)' },
+      { lbl: 'Salesforce Entry Cost', calcVal: (emp, it) => (it * 75 * 12) + (emp * 15 * 12), sub: '$5/emp/mo (AI agents) + $75/IT fulfiller/mo (full ITSM)' },
       { lbl: 'Net Cost After Deflection', calcVal: (emp, it, rate, tpm, hrs) => {
           const sfCost = (it * 75 * 12) + (emp * 5 * 12);
           const deflectionSavings = emp * tpm * 0.4 * hrs * rate * 12;
@@ -1601,7 +1588,7 @@ const COMP_PRICING = {
     items: [
       { lbl: 'AI Agents for Employees', calcVal: (emp) => emp * 5 * 12, sub: '$5/employee/mo — Slack/Teams AI agents, 50+ OOTB, no new portal' },
       { lbl: 'IT Service Desk EE', calcVal: (emp, it) => it * 75 * 12, sub: '$75/IT fulfiller/mo — full ITIL, CMDB, AI for IT team' },
-      { lbl: 'Total Annual Subscription', calcVal: (emp, it) => (it * 75 * 12) + (emp * 3 * 12), sub: 'All-in — no upgrade fees, no add-ons for AI or CMDB' },
+      { lbl: 'Total Annual Subscription', calcVal: (emp, it) => (it * 75 * 12) + (emp * 15 * 12), sub: 'All-in — no upgrade fees, no add-ons for AI or CMDB' },
       { lbl: 'Case Deflection Value', calcVal: () => null, staticVal: 'See calculator →', sub: '40% of cases auto-resolved — value returned typically exceeds subscription' },
     ],
     note: 'Salesforce publishes all ITSM pricing transparently. No renegotiation, no upgrade projects, no specialist admin required. AI agents and CMDB are included — not add-ons.'
@@ -1707,26 +1694,23 @@ function recalcROI() {
 
   // Update pricing section example
   if (emp > 0 && itStaff > 0) {
-    const moDealer = (emp * 3) + (itStaff * 75);
-    const moList   = (emp * 15) + (itStaff * 75);
-    const saved    = moList - moDealer;
-    document.getElementById('price-example-calc').textContent = '$' + moDealer.toLocaleString() + '/mo';
+    const moList = (emp * 15) + (itStaff * 75);
+    document.getElementById('price-example-calc').textContent = '$' + moList.toLocaleString() + '/mo';
     const fn = document.getElementById('price-footnote-dynamic');
-    if (fn) fn.innerHTML = `Based on your inputs (${Math.round(emp).toLocaleString()} employees, ${Math.round(itStaff)} IT staff): dealer price = <strong>$${moDealer.toLocaleString()}/mo</strong> vs. list $${moList.toLocaleString()}/mo — <strong style="color:var(--brand-primary)">saving $${saved.toLocaleString()}/mo</strong>. `;
+    if (fn) fn.innerHTML = `Based on your inputs (${Math.round(emp).toLocaleString()} employees, ${Math.round(itStaff)} IT staff): list price = <strong>$${moList.toLocaleString()}/mo</strong>. `;
   }
-
-  // Salesforce subscription cost — dealer price $3/emp vs list $15/emp
-  const EMP_DEALER = 3;
-  const EMP_LIST   = 15;
-  const sfCost     = (itStaff * 75 * 12) + (emp * EMP_DEALER * 12);
-  const sfCostList = (itStaff * 75 * 12) + (emp * EMP_LIST   * 12);
-  const empSavings = (EMP_LIST - EMP_DEALER) * emp * 12;
 
   // Value returned by AI case deflection (40% of tickets auto-resolved, no IT touch)
   const totalTicketsMonth = emp * tpm;
   const deflected         = totalTicketsMonth * 0.40;
   const hoursFreed        = deflected * hrs;
   const deflectionValue   = hoursFreed * 12 * rate;   // annual labor value of deflected cases
+
+  // Salesforce subscription cost — list price $15/emp
+  const EMP_LIST   = 15;
+  const sfCost     = (itStaff * 75 * 12) + (emp * EMP_LIST * 12);
+  const sfCostList = sfCost;
+  const empSavings = deflectionValue > sfCost ? (deflectionValue - sfCost) : 0;  // net first-year savings
 
   const roi           = sfCost > 0 ? ((deflectionValue - sfCost) / sfCost * 100) : 0;
   const paybackMonths = deflectionValue > 0 ? Math.max(1, Math.round(sfCost / (deflectionValue / 12))) : null;
@@ -1742,29 +1726,30 @@ function recalcROI() {
   // ── 1-page ROI summary doc ──
   const comp = document.getElementById('cfg-competitor').value;
   const compLabels = { servicenow:'ServiceNow', jira:'Jira Service Mgmt', freshservice:'Freshservice', cherwell:'Cherwell / Ivanti (EOL)', remedy:'BMC Remedy / Helix', remedyforce:'Remedyforce', email:'Email / Ad-Hoc', none:'No formal ITSM', other:'Current Tool', '':'Not specified' };
-  const dealer = document.getElementById('cfg-dealer').value.trim() || 'Your Dealership';
+  const dealer = document.getElementById('cfg-dealer').value.trim() || 'Roper Technologies';
 
   document.getElementById('roi-sum-title').textContent  = 'ROI Summary — ' + dealer;
   document.getElementById('roi-sum-date').textContent   = 'Prepared ' + new Date().toLocaleDateString('en-US', {month:'long', day:'numeric', year:'numeric'});
-  document.getElementById('roi-sum-badge').textContent  = dealer + ' · Dealer Program';
+  document.getElementById('roi-sum-badge').textContent  = dealer + ' · Enterprise Program';
 
   // KPIs
   document.getElementById('sum-kpi-savings').textContent        = deflectionValue > 0 ? fmt(deflectionValue) : '—';
   document.getElementById('sum-kpi-cost').textContent           = sfCost > 0 ? fmt(sfCost) : '—';
   document.getElementById('sum-kpi-roi').textContent            = roi > 0 ? Math.round(roi) + '%' : '—';
-  document.getElementById('sum-kpi-dealer-savings').textContent = empSavings > 0 ? fmt(empSavings) : '—';
+  document.getElementById('sum-kpi-dealer-savings').textContent = empSavings > 0 ? fmt(empSavings) : '—';  // net first-year savings
 
   // Savings bar
   if (emp > 0) {
-    document.getElementById('sum-bar-savings-text').textContent = '80% off ($3 vs. $15/emp/mo)';
-    document.getElementById('sum-bar-pill').textContent = empSavings > 0 ? fmt(empSavings) + '/yr saved' : 'Save $12/emp/mo';
+    const roiPct = sfCost > 0 ? Math.round((deflectionValue - sfCost) / sfCost * 100) : 0;
+    document.getElementById('sum-bar-savings-text').textContent = roiPct > 0 ? roiPct + '% net ROI from AI deflection' : 'positive ROI from AI deflection';
+    document.getElementById('sum-bar-pill').textContent = empSavings > 0 ? fmt(empSavings) + '/yr net' : 'Positive ROI';
   }
 
   const mkRow = (k, v) => `<div class="roi-sum-row"><span class="roi-sum-key">${k}</span><span class="roi-sum-val">${v}</span></div>`;
 
   // Col 1: environment
   document.getElementById('roi-sum-env-rows').innerHTML =
-    mkRow('Dealership', dealer) +
+    mkRow('Organization', dealer) +
     mkRow('Total Employees', emp > 0 ? emp.toLocaleString() : '—') +
     mkRow('IT Staff / Fulfillers', itStaff > 0 ? itStaff : '—') +
     mkRow('Current ITSM', compLabels[comp] || 'Not specified') +
@@ -1797,11 +1782,10 @@ function recalcROI() {
   } else {
     document.getElementById('roi-sum-comp-title').textContent = 'Salesforce Subscription Detail';
     document.getElementById('roi-sum-comp-rows').innerHTML =
-      mkRow('AI Agents · dealer price', emp > 0 ? fmt(emp * 3 * 12) + '/yr' : '—') +
       mkRow('AI Agents · list price', emp > 0 ? fmt(emp * 15 * 12) + '/yr' : '—') +
       mkRow('IT Service Desk EE', itStaff > 0 ? fmt(itStaff * 75 * 12) + '/yr' : '—') +
-      mkRow('Total (dealer pricing)', sfCost > 0 ? fmt(sfCost) + '/yr' : '—') +
-      mkRow('Dealer savings vs. list', empSavings > 0 ? fmt(empSavings) + '/yr' : '—');
+      mkRow('Total (list pricing)', sfCost > 0 ? fmt(sfCost) + '/yr' : '—') +
+      mkRow('Net first-year savings', empSavings > 0 ? fmt(empSavings) + '/yr' : '—');
   }
 
   if (emp > 0 && itStaff > 0) document.getElementById('roi-summary').classList.add('visible');
@@ -1820,7 +1804,7 @@ function closeModal() {
 }
 
 function updateModalPreview() {
-  const dealer  = document.getElementById('cfg-dealer').value.trim() || 'Your Dealership';
+  const dealer  = document.getElementById('cfg-dealer').value.trim() || 'Roper Technologies';
   const comp    = document.getElementById('cfg-competitor').value;
   const compLabels = { servicenow:'ServiceNow', jira:'Jira Service Mgmt', freshservice:'Freshservice', cherwell:'Cherwell (EOL)', remedy:'BMC Remedy', remedyforce:'Remedyforce', email:'Email/Ad-Hoc', none:'No formal ITSM', other:'Current Tool', '':'Not specified' };
   const savings = document.getElementById('res-savings').textContent;
@@ -1844,7 +1828,7 @@ function submitDemo() {
 
   if (!fname || !email) { alert('Please enter your name and email.'); return; }
 
-  const dealer  = document.getElementById('cfg-dealer').value.trim() || company || 'Your Dealership';
+  const dealer  = document.getElementById('cfg-dealer').value.trim() || company || 'Roper Technologies';
   const comp    = document.getElementById('cfg-competitor').value;
   const compLabels = { servicenow:'ServiceNow', jira:'Jira Service Mgmt', freshservice:'Freshservice', cherwell:'Cherwell (EOL)', remedy:'BMC Remedy', remedyforce:'Remedyforce', email:'Email/Ad-Hoc', none:'No formal ITSM', other:'Current Tool', '':'Not specified' };
   const savings = document.getElementById('res-savings').textContent;
@@ -1866,7 +1850,7 @@ Cases Auto-Resolved/Mo: ${deflect}
 IT Hours Freed/Mo: ${hours}
 Net ROI: ${roi} | Payback: ${payback}
 Notes: ${notes || 'None'}
-Submitted: ${date} via Agentforce IT Service Dealer Outreach Tool`;
+Submitted: ${date} via Agentforce IT Service Enterprise Outreach Tool`;
 
   // Build hidden Web-to-Lead form and submit silently
   const form = document.createElement('form');
@@ -1910,7 +1894,7 @@ function showConfirmation(fname, company) {
     position:fixed; top:20px; left:50%; transform:translateX(-50%);
     background:#032D60; color:#fff; border-radius:10px; padding:16px 28px;
     box-shadow:0 8px 32px rgba(0,0,0,.25); z-index:2000; font-size:14px;
-    border-left:4px solid #FFDE00; max-width:480px; text-align:center; line-height:1.5;
+    border-left:4px solid #A8C8F0; max-width:480px; text-align:center; line-height:1.5;
     animation: modalIn .2s ease;
   `;
   banner.innerHTML = `<strong>✅ Lead created in Salesforce!</strong><br>
@@ -1938,7 +1922,7 @@ recalcROI();
 
 // Show confirmation if returning from Web-to-Lead retURL
 if (window.location.search.includes('demo=submitted')) {
-  showConfirmation('Your contact', 'your dealership');
+  showConfirmation('Your contact', 'Roper Technologies');
 }
 </script>
 </body>
