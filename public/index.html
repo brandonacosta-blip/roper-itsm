@@ -1803,11 +1803,41 @@ function recalcROI() {
 }
 
 function scheduleDemo() {
-  // Pre-fill modal with known dealer info
-  const dealer = document.getElementById('cfg-dealer').value.trim();
-  if (dealer) document.getElementById('m-company').value = dealer;
-  updateModalPreview();
-  document.getElementById('demo-modal').classList.add('open');
+  const dealer   = document.getElementById('cfg-dealer').value.trim() || 'Roper Technologies';
+  const emp      = document.getElementById('roi-emp').value || '18200';
+  const it       = document.getElementById('roi-it').value || '';
+  const comp     = document.getElementById('cfg-competitor').value;
+  const compLabels = { servicenow:'ServiceNow', jira:'Jira Service Mgmt', freshservice:'Freshservice', cherwell:'Cherwell (EOL)', remedy:'BMC Remedy', remedyforce:'Remedyforce', email:'Email/Ad-Hoc', none:'No formal ITSM', other:'Current Tool', '':'Not specified' };
+  const savings  = document.getElementById('res-savings').textContent;
+  const sfcost   = document.getElementById('res-sfcost').textContent;
+  const roi      = document.getElementById('res-roi').textContent;
+  const payback  = document.getElementById('res-payback').textContent;
+  const deflect  = document.getElementById('res-deflect').textContent;
+  const hours    = document.getElementById('res-hours').textContent;
+
+  const hasROI = roi && roi !== '—' && roi !== '';
+  const roiSection = hasROI
+    ? `\nROI Summary\n-----------\nSubscription est.: ${sfcost}\nCase deflection value: ${savings}\nCases auto-resolved/mo: ${deflect}\nIT hours freed/mo: ${hours}\nNet ROI: ${roi}\nPayback period: ${payback}`
+    : '\n(ROI calculator not yet run — see page for interactive model)';
+
+  const subject = `Demo Request — Agentforce IT Service for ${dealer}`;
+  const body =
+`Hi Jakob,
+
+I'd like to schedule a demo of Agentforce IT Service for ${dealer}.
+
+Organization Details
+--------------------
+Company: ${dealer}
+Employees: ${emp}${it ? '\nIT staff: ' + it : ''}
+Current ITSM: ${compLabels[comp] || 'Not specified'}
+${roiSection}
+
+Please let me know your availability.
+
+Thanks`;
+
+  window.location.href = `mailto:jbollman@salesforce.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 function closeModal() {
